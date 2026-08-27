@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FH Data • Chat da Base</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: #001716; color: #E6E3D3; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #001716; }
+    ::-webkit-scrollbar-thumb { background: #133B3A; border-radius: 9999px; }
+    .fh-card {
+      background: rgba(0, 36, 36, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(42, 197, 158, 0.15);
+    }
+    .prose-fh h1, .prose-fh h2, .prose-fh h3 { color: #FAF6E6; font-weight: 700; margin: 0.9rem 0 0.4rem; font-size: 0.95rem; }
+    .prose-fh p { margin: 0.45rem 0; line-height: 1.65; }
+    .prose-fh ul, .prose-fh ol { margin: 0.4rem 0 0.4rem 1.1rem; }
+    .prose-fh li { margin: 0.2rem 0; }
+    .prose-fh strong { color: #52E1B9; font-weight: 700; }
+    .prose-fh code { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; background: #00201F; padding: 0.1rem 0.35rem; border-radius: 0.35rem; color: #C2EAE8; }
+    .prose-fh table { width: 100%; font-size: 0.78rem; margin: 0.6rem 0; border-collapse: collapse; }
+    .prose-fh th { text-align: left; color: #2AC59E; border-bottom: 1px solid #133B3A; padding: 0.35rem 0.5rem; }
+    .prose-fh td { border-bottom: 1px solid #042F2F; padding: 0.35rem 0.5rem; }
+    .typing::after { content: '▍'; animation: blink 1s step-end infinite; color: #2AC59E; }
+    @keyframes blink { 50% { opacity: 0; } }
+    @keyframes pulse-mint { 0%, 100% { box-shadow: 0 0 0 0 rgba(42,197,158,0.35); } 50% { box-shadow: 0 0 0 8px rgba(42,197,158,0); } }
+    .live-dot { animation: pulse-mint 1.6s infinite; }
+  </style>
+</head>
+<body class="h-full min-h-screen antialiased">
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[640px] h-[220px] bg-[#2AC59E]/10 blur-[120px] pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto h-screen flex flex-col lg:flex-row">
+    <aside class="lg:w-80 shrink-0 border-b lg:border-b-0 lg:border-r border-[#133B3A] p-4 lg:p-5 flex flex-col gap-4">
+      <div class="flex items-center justify-between gap-3">
+        <a href="/" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#00382A] to-[#042F2F] border border-[#2AC59E]/40 flex items-center justify-center">
+            <i data-lucide="sparkles" class="w-5 h-5 text-[#2AC59E]"></i>
+          </div>
+          <div>
+            <div class="text-sm font-extrabold text-[#FAF6E6] tracking-tight">FH DATA</div>
+            <div class="text-[11px] text-[#CECABB]">Chat central da base</div>
+          </div>
+        </a>
+        <a href="/" class="text-[11px] px-2.5 py-1.5 rounded-lg border border-[#2AC59E]/30 text-[#CECABB] hover:text-[#FAF6E6]">Dashboard</a>
+      </div>
+
+      <div class="fh-card rounded-2xl p-4 space-y-2">
+        <div class="flex items-center gap-2 text-xs">
+          <span id="status-dot" class="w-2 h-2 rounded-full bg-[#E2B93B] live-dot"></span>
+          <span id="status-text" class="text-[#CECABB]">Preparando RAG local…</span>
+        </div>
+        <p id="status-meta" class="text-[11px] text-[#B8C1BF] leading-relaxed">Carregando 2.371 negócios, KPIs e embeddings Gemini.</p>
+      </div>
+
+      <div class="hidden lg:block space-y-2">
+        <p class="text-[11px] font-bold uppercase tracking-wider text-[#2AC59E]">Pergunte à base</p>
+        <div id="suggestions" class="flex flex-col gap-2"></div>
+      </div>
+
+      <button id="btn-clear" class="mt-auto hidden lg:flex items-center gap-2 text-xs text-[#CECABB] hover:text-[#FAF6E6]">
+        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+        Nova conversa
+      </button>
+    </aside>
+
+    <main class="flex-1 flex flex-col min-h-0">
+      <div id="messages" class="flex-1 overflow-y-auto px-4 lg:px-8 py-5 space-y-4"></div>
+
+      <form id="chat-form" class="p-4 lg:px-8 lg:pb-6">
+        <div class="fh-card rounded-2xl p-2 flex items-end gap-2">
+          <textarea id="input" rows="1" required
+            placeholder="Pergunte qualquer coisa sobre vendas, glosa, vendedores, clientes, perdas…"
+            class="flex-1 bg-transparent resize-none px-3 py-2.5 text-sm text-[#FAF6E6] placeholder:text-[#B8C1BF]/70 outline-none max-h-36"></textarea>
+          <button id="btn-send" type="submit"
+            class="shrink-0 m-1 px-3.5 py-2.5 rounded-xl bg-[#2AC59E] text-[#001716] font-bold text-sm flex items-center gap-2 hover:bg-[#52E1B9] disabled:opacity-40">
+            <i data-lucide="send" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Enviar</span>
+          </button>
+        </div>
+        <p class="text-[10px] text-[#B8C1BF] mt-2 px-1">Respostas com Gemini na sua chave local. Números saem da base CSV/SQLite, não da memória do modelo.</p>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    marked.setOptions({ breaks: true });
+    const SUGGESTIONS = [
+      'Qual a receita líquida total e a evolução ano a ano?',
+      'Quem prende mais capital em DSO e glosa?',
+      'Por que perdemos na cotação e quanto isso vale?',
+      'Compare Ortopedia, Cardiologia e Cirurgia geral em 2024-2025.',
+      'Estamos no caminho da meta de R$ 110 milhões?'
+    ];
+    const messagesEl = document.getElementById('messages');
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('input');
+    const btnSend = document.getElementById('btn-send');
+    const suggestionsEl = document.getElementById('suggestions');
+    let history = [];
+    let busy = false;
+
+    SUGGESTIONS.forEach((text) => {
+      const btn = document.createElement('button');
+      btn.className = 'text-left text-xs leading-snug px-3 py-2 rounded-xl border border-[#133B3A] hover:border-[#2AC59E]/50 hover:bg-[#002424] text-[#E6E3D3]';
+      btn.textContent = text;
+      btn.onclick = () => send(text);
+      suggestionsEl.appendChild(btn);
+    });
+
+    function renderWelcome() {
+      messagesEl.innerHTML = `
+        <div class="fh-card rounded-3xl p-6 max-w-2xl">
+          <div class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wide text-[#2AC59E] mb-3">
+            <i data-lucide="database" class="w-3.5 h-3.5"></i> RAG local inteligente
+          </div>
+          <h1 class="text-2xl font-extrabold text-[#FAF6E6] mb-2">Converse com toda a base da FH Saúde.</h1>
+          <p class="text-sm text-[#CECABB] leading-relaxed">
+            Eu cruzo embeddings Gemini com SQL sobre os 2.371 negócios, KPIs, vendedores, clientes, glosas e perdas.
+            Peça rankings, causas, recortes por ano/estado/produto ou uma leitura de C-Suite.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2 lg:hidden" id="mobile-suggestions"></div>
+        </div>`;
+      lucide.createIcons();
+      const mobile = document.getElementById('mobile-suggestions');
+      if (mobile) {
+        SUGGESTIONS.forEach((text) => {
+          const btn = document.createElement('button');
+          btn.className = 'text-left text-[11px] px-3 py-2 rounded-xl border border-[#133B3A] text-[#E6E3D3]';
+          btn.textContent = text;
+          btn.onclick = () => send(text);
+          mobile.appendChild(btn);
+        });
+      }
+    }
+
+    function addBubble(role, html, meta) {
+      const wrap = document.createElement('div');
+      wrap.className = role === 'user' ? 'flex justify-end' : 'flex justify-start';
+      const bubble = document.createElement('div');
+      bubble.className = role === 'user'
+        ? 'max-w-2xl rounded-2xl rounded-br-md bg-[#2AC59E] text-[#001716] px-4 py-3 text-sm font-medium'
+        : 'max-w-3xl fh-card rounded-2xl rounded-bl-md px-4 py-3 text-sm prose-fh';
+      bubble.innerHTML = html;
+      wrap.appendChild(bubble);
+      if (meta) {
+        const extra = document.createElement('div');
+        extra.className = 'w-full mt-2 flex flex-wrap gap-1.5';
+        extra.innerHTML = meta;
+        wrap.className = 'flex flex-col items-start';
+        wrap.appendChild(extra);
+      }
+      messagesEl.appendChild(wrap);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      lucide.createIcons();
+      return bubble;
+    }
+
+    function sourceChips(sources, tools, model) {
+      const chips = (sources || []).slice(0, 6).map(s =>
+        `<span class="text-[10px] px-2 py-1 rounded-full border border-[#2AC59E]/25 text-[#C2EAE8]">${s.kind} · ${s.id}</span>`
+      ).join('');
+      const toolN = (tools || []).length;
+      return `${chips}<span class="text-[10px] px-2 py-1 rounded-full border border-[#133B3A] text-[#CECABB]">${model || ''} · ${toolN} consulta${toolN === 1 ? '' : 's'}</span>`;
+    }
+
+    async function pollHealth() {
+      try {
+        const res = await fetch('/api/health');
+        const data = await res.json();
+        const dot = document.getElementById('status-dot');
+        const text = document.getElementById('status-text');
+        const meta = document.getElementById('status-meta');
+        if (data.ok && data.ready) {
+          dot.className = 'w-2 h-2 rounded-full bg-[#2AC59E] live-dot';
+          text.textContent = 'Base indexada e pronta';
+          meta.textContent = `${data.deals} negócios · ${data.chunks} trechos · ${data.model}`;
+          return true;
+        }
+        dot.className = 'w-2 h-2 rounded-full bg-[#E2B93B] live-dot';
+        text.textContent = 'Indexando a base…';
+        meta.textContent = data.index || data.error || 'Gerando embeddings locais.';
+      } catch (err) {
+        document.getElementById('status-text').textContent = 'Servidor offline';
+      }
+      return false;
+    }
+
+    async function send(text) {
+      if (busy) return;
+      const message = (text || input.value).trim();
+      if (!message) return;
+      if (history.length === 0) messagesEl.innerHTML = '';
+      busy = true;
+      btnSend.disabled = true;
+      input.value = '';
+      addBubble('user', escapeHtml(message));
+      const thinking = addBubble('assistant', '<span class="typing text-[#CECABB]">Consultando a base com RAG + SQL</span>');
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, history })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Falha no chat');
+        thinking.parentElement.remove();
+        addBubble('assistant', marked.parse(data.answer || ''), sourceChips(data.sources, data.tools, data.model));
+        history.push({ role: 'user', content: message });
+        history.push({ role: 'assistant', content: data.answer || '' });
+      } catch (err) {
+        thinking.innerHTML = `<span class="text-[#FF6568]">${escapeHtml(err.message)}</span>`;
+      } finally {
+        busy = false;
+        btnSend.disabled = false;
+        input.focus();
+      }
+    }
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>"']/g, (ch) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[ch]));
+    }
+
+    form.addEventListener('submit', (e) => { e.preventDefault(); send(); });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+    });
+    document.getElementById('btn-clear').addEventListener('click', () => {
+      history = [];
+      renderWelcome();
+    });
+
+    renderWelcome();
+    lucide.createIcons();
+    pollHealth().then((ready) => {
+      if (ready) return;
+      const timer = setInterval(async () => {
+        if (await pollHealth()) clearInterval(timer);
+      }, 2500);
+    });
+  </script>
+</body>
+</html>

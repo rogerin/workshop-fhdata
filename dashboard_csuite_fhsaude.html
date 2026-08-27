@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full bg-[#001716] text-[#E6E3D3]">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>FH Data • Inteligência Estratégica C-Suite</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            fh: {
+              950: '#001716',
+              900: '#00201F',
+              850: '#002424',
+              800: '#042F2F',
+              750: '#063535',
+              700: '#133B3A',
+              600: '#183F3E',
+              mint: '#2AC59E',
+              'mint-light': '#52E1B9',
+              'mint-dark': '#00BD97',
+              sand: '#E6E3D3',
+              'sand-light': '#FAF6E6',
+              'sand-muted': '#CECABB',
+              'sand-dark': '#B8C1BF',
+              coral: '#FF6568',
+              'coral-dark': '#EB5757',
+              gold: '#E2B93B',
+              cyan: '#C2EAE8',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #001716;
+      color: #E6E3D3;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* FH Data Glass Card System */
+    .fh-card {
+      background: rgba(0, 36, 36, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(42, 197, 158, 0.15);
+      box-shadow: 0 8px 32px 0 rgba(0, 23, 22, 0.37);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .fh-card:hover {
+      border-color: rgba(42, 197, 158, 0.35);
+      box-shadow: 0 12px 40px 0 rgba(42, 197, 158, 0.08);
+    }
+
+    .fh-card-highlight {
+      background: linear-gradient(135deg, rgba(4, 47, 47, 0.8) 0%, rgba(0, 32, 31, 0.9) 100%);
+      border: 1px solid rgba(42, 197, 158, 0.3);
+    }
+
+    /* Glow Elements */
+    .mint-glow {
+      box-shadow: 0 0 25px rgba(42, 197, 158, 0.25);
+    }
+    .mint-glow-sm {
+      box-shadow: 0 0 12px rgba(42, 197, 158, 0.2);
+    }
+    .coral-glow-sm {
+      box-shadow: 0 0 12px rgba(255, 101, 104, 0.2);
+    }
+
+    /* Tab navigation active state */
+    .fh-tab-active {
+      background: rgba(42, 197, 158, 0.15) !important;
+      color: #2AC59E !important;
+      border: 1px solid rgba(42, 197, 158, 0.4) !important;
+      font-weight: 700;
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #001716;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #133B3A;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2AC59E;
+    }
+
+    /* Mobile First Helpers */
+    @media (max-width: 640px) {
+      .mobile-hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .mobile-hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col antialiased selection:bg-[#2AC59E] selection:text-[#001716]">
+
+  <!-- Top Ambient Brand Light -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-[#2AC59E]/10 blur-[120px] pointer-events-none z-0"></div>
+
+  <!-- Header Bar -->
+  <header class="sticky top-0 z-50 bg-[#001716]/90 backdrop-blur-xl border-b border-[#133B3A]">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      
+      <!-- Upper Header: Brand & Meta Status -->
+      <div class="flex items-center justify-between h-16 gap-2">
+        
+        <!-- Brand Logo & Identity -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#00382A] to-[#042F2F] border border-[#2AC59E]/40 flex items-center justify-center mint-glow-sm">
+            <svg class="w-5 h-5 text-[#2AC59E]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-base sm:text-lg font-extrabold text-[#FAF6E6] tracking-tight">FH DATA</span>
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-[#2AC59E]/10 text-[#2AC59E] border border-[#2AC59E]/30 uppercase tracking-wide">C-Suite</span>
+            </div>
+            <p class="text-[11px] text-[#CECABB] hidden sm:block">Inteligência Estratégica: CEO • CFO • COO • CHRO • CMO</p>
+          </div>
+        </div>
+
+        <!-- Meta 110M / Restrição Badge (Desktop) -->
+        <div class="hidden lg:flex items-center gap-2 text-xs bg-[#002424] py-1.5 px-3 rounded-full border border-[#2AC59E]/30">
+          <span class="w-2 h-2 rounded-full bg-[#2AC59E] animate-pulse"></span>
+          <span class="text-[#CECABB]">Meta 5 Anos:</span>
+          <span class="font-bold text-[#52E1B9]">R$ 110M</span>
+          <span class="text-[10px] text-[#E6E3D3]/60 px-1.5 py-0.5 rounded bg-[#001716] border border-[#133B3A]">Sem Dívida / Sem Diluição</span>
+        </div>
+
+        <!-- Quick Actions & Print -->
+        <div class="flex items-center gap-2">
+          <a href="/chat" class="px-3 py-2 rounded-xl bg-[#2AC59E] hover:bg-[#52E1B9] text-xs font-bold text-[#001716] border border-[#2AC59E]/30 flex items-center gap-1.5 transition-all">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+            <span class="hidden sm:inline">Chat IA</span>
+          </a>
+          <button onclick="window.print()" class="px-3 py-2 rounded-xl bg-[#042F2F] hover:bg-[#133B3A] text-xs font-semibold text-[#FAF6E6] border border-[#2AC59E]/30 flex items-center gap-1.5 transition-all">
+            <i data-lucide="printer" class="w-3.5 h-3.5 text-[#2AC59E]"></i>
+            <span class="hidden sm:inline">Exportar / Imprimir</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Navigation Tabs (Mobile-First Horizontal Swipe) -->
+      <nav class="flex space-x-1.5 overflow-x-auto mobile-hide-scrollbar py-2 border-t border-[#133B3A]/60">
+        
+        <button onclick="switchTab('overview')" id="tab-btn-overview" class="fh-tab-button fh-tab-active px-3.5 py-2 text-xs font-semibold rounded-xl text-[#CECABB] hover:text-[#FAF6E6] bg-[#002424]/60 border border-transparent flex items-center gap-2 transition-all shrink-0">
+          <i data-lucide="layout-grid" class="w-4 h-4 text-[#2AC59E]"></i>
+          <span>Visão Geral</span>
+        </button>
+
+        <button onclick="switchTab('dilemmas')" id="tab-btn-dilemmas" class="fh-tab-button px-3.5 py-2 text-xs font-semibold rounded-xl text-[#E2B93B] hover:text-[#FAF6E6] bg-[#002424]/60 border border-[#E2B93B]/30 flex items-center gap-2 transition-all shrink-0">
+          <i data-lucide="help-circle" class="w-4 h-4 text-[#E2B93B]"></i>
+          <span>Dilemas de OKR & Perguntas</span>
+        </button>
+
+        <button onclick="switchTab('ceo')" id="tab-btn-ceo" class="fh-tab-button px-3.5 py-2 text-xs font-semibold rounded-xl text-[#CECABB] hover:text-[#FAF6E6] bg-[#002424]/60 border border-transparent flex items-center gap-2 transition-all shrink-0">
+          <i data-lucide="crown" class="w-4 h-4 text-[#52E1B9]"></i>
+          <span>CEO • Estratégia</span>
+        </button>
+
+        <button onclick="switchTab('cfo')" id="tab-btn-cfo" class="fh-tab-button px-3.5 py-2 text-xs font-semibold rounded-xl text-[#CECABB] hover:text-[#FAF6E6] bg-[#002424]/60 border border-transparent flex items-center gap-2 transition-all shrink-0">
+          <i data-lucide="dollar-sign" class="w-4 h-4 text-[#2AC59E]"></i>
+          <span>CFO • Finanças</span>
+        </button>
+
+        <button onclick="switchTab('coo')" id="tab-btn-coo" class="fh-tab-button px-3.5 py-2 text-xs font-semibold rounded-xl text-[#CECABB] hover:text-[#FAF6E6] bg-[#002424]/60 border border-transparent flex items-center gap-2 transition-all shrink-0">
+          <i data-lucide="sliders" class="w-4 h-4 text-[#E2B93B]"></i>
+          <span>COO • Operações</span>
+        </button>
+
+        <button onclick="switchTab('chro')" id="tab-btn-chro" class="fh-tab-button px-3.5 py-2 text-xs font-semibold rounded-xl text-[#CECABB] hover:text-[#FAF6E6] bg-[#002424]/60 border border-transparent flex items-center gap-2 transition-all shrink-0">
+          <i data-lucide="users" class="w-4 h-4 text-[#FF6568]"></i>
+          <span>CHRO • Força Comercial</span>
+        </button>
+
+        <button onclick="switchTab('cmo')" id="tab-btn-cmo" class="fh-tab-button px-3.5 py-2 text-xs font-semibold rounded-xl text-[#CECABB] hover:text-[#FAF6E6] bg-[#002424]/60 border border-transparent flex items-center gap-2 transition-all shrink-0">
+          <i data-lucide="target" class="w-4 h-4 text-[#C2EAE8]"></i>
+          <span>CMO • Produtos</span>
+        </button>
+
+        <a href="/chat" class="fh-tab-button px-3.5 py-2 text-xs font-semibold rounded-xl text-[#001716] bg-[#2AC59E] hover:bg-[#52E1B9] border border-[#2AC59E]/40 flex items-center gap-2 transition-all shrink-0">
+          <i data-lucide="message-square" class="w-4 h-4"></i>
+          <span>Chat da Base</span>
+        </a>
+
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 space-y-6">
+
+    <!-- ===================================================================================== -->
+    <!-- TAB: DILEMAS DE OKR & SESSÕES DE PERGUNTAS ESTRATÉGICAS (DESTAQUE) -->
+    <!-- ===================================================================================== -->
+    <div id="tab-dilemmas" class="tab-content hidden space-y-6">
+      
+      <!-- Top Banner Dilemas -->
+      <div class="fh-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-[#E2B93B] relative overflow-hidden bg-gradient-to-r from-[#00201F] via-[#042F2F] to-[#00201F]">
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#E2B93B]/20 text-[#E2B93B] border border-[#E2B93B]/30 uppercase tracking-wider">Alinhamento C-Suite</span>
+            <span class="text-xs text-[#CECABB]">O Vício dos Silos vs Visão Sistêmica de Capital</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-[#FAF6E6] tracking-tight">Sessões Estratégicas: Pergunta, OKR, Vício de Incentivo & Ponto Cego</h2>
+          <p class="text-xs sm:text-sm text-[#CECABB] max-w-4xl leading-relaxed">
+            Quando cada executivo persegue sua meta isoladamente sem considerar a restrição de capital de giro, a empresa corre o risco de quebrar no meio da expansão. Veja o diagnóstico aprofundado para cada cadeira:
+          </p>
+        </div>
+      </div>
+
+      <!-- SESSÃO 1: CEO -->
+      <div class="fh-card rounded-2xl p-5 sm:p-6 space-y-4 border border-[#2AC59E]/30">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#133B3A] pb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-[#00382A] border border-[#2AC59E]/50 flex items-center justify-center text-[#2AC59E] font-extrabold text-sm mint-glow-sm">
+              CEO
+            </div>
+            <div>
+              <span class="text-[10px] uppercase tracking-wider text-[#2AC59E] font-bold">Pergunta Central do CEO</span>
+              <h3 class="text-base sm:text-lg font-bold text-[#FAF6E6]">"Qual é a meta do ano que vem e dos próximos cinco anos?"</h3>
+            </div>
+          </div>
+          <div class="px-3 py-1.5 rounded-xl bg-[#002424] border border-[#2AC59E]/30 text-xs text-[#52E1B9] font-bold self-start sm:self-auto">
+            R$ 110M em 5 anos • Bootstrapping
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <!-- 1. OKR -->
+          <div class="p-4 rounded-xl bg-[#001716] border border-[#133B3A] space-y-2">
+            <div class="font-bold text-[#52E1B9] flex items-center gap-1.5">
+              <i data-lucide="target" class="w-4 h-4"></i>
+              <span>1. O OKR Definido</span>
+            </div>
+            <p class="text-[#E6E3D3] leading-relaxed">
+              Chegar a <strong class="text-[#FAF6E6]">R$ 110 Milhões em 5 anos</strong> (2030) e assumir a liderança regional no Nordeste, <strong class="text-[#2AC59E]">sem captar dívida e sem diluir sociedade</strong>.
+            </p>
+            <div class="text-[11px] text-[#CECABB] bg-[#002424] p-2.5 rounded-lg border border-[#133B3A]">
+              Base 2025: R$ 48,6M → Meta 2026: R$ 57,2M (+17,7%) → Meta 2030: R$ 110M (+126,3% total).
+            </div>
+          </div>
+
+          <!-- 2. Vício -->
+          <div class="p-4 rounded-xl bg-[#001716] border border-[#E2B93B]/30 space-y-2">
+            <div class="font-bold text-[#E2B93B] flex items-center gap-1.5">
+              <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+              <span>2. O que o OKR empurra a fazer</span>
+            </div>
+            <p class="text-[#E6E3D3] leading-relaxed">
+              Cobrar crescimento agressivo de receita de todo mundo o tempo todo, pressionando o time a fechar qualquer cotação de alto valor, sem olhar prazos de pagamento ou histórico de glosa do pagador.
+            </p>
+          </div>
+
+          <!-- 3. Ponto Cego -->
+          <div class="p-4 rounded-xl bg-[#001716] border border-[#FF6568]/40 space-y-2">
+            <div class="font-bold text-[#FF6568] flex items-center gap-1.5">
+              <i data-lucide="shield-alert" class="w-4 h-4"></i>
+              <span>3. Onde ele erra sozinho (Ponto Cego)</span>
+            </div>
+            <p class="text-[#E6E3D3] leading-relaxed">
+              <strong class="text-[#FF6568]">Trata a restrição de capital como detalhe do CFO</strong>, quando ela é exatamente o que define a velocidade máxima de crescimento sustentável da empresa inteira.
+            </p>
+            <p class="text-[#CECABB] text-[11px] leading-relaxed">
+              Com o ciclo atual de 165 dias, para faturar R$ 110M a empresa precisará de <strong class="text-[#FAF6E6]">R$ 49,6 Milhões de capital de giro imobilizado</strong>. Sem dívida nem diluição, a empresa quebra antes de bater R$ 70M se não reduzir o ciclo de caixa!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSÃO 2: CHRO -->
+      <div class="fh-card rounded-2xl p-5 sm:p-6 space-y-4 border border-[#FF6568]/30">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#133B3A] pb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-[#002424] border border-[#FF6568]/50 flex items-center justify-center text-[#FF6568] font-extrabold text-sm coral-glow-sm">
+              CHRO
+            </div>
+            <div>
+              <span class="text-[10px] uppercase tracking-wider text-[#FF6568] font-bold">Pergunta Central do CHRO</span>
+              <h3 class="text-base sm:text-lg font-bold text-[#FAF6E6]">"Qual dos meus vendedores performa melhor?"</h3>
+            </div>
+          </div>
+          <div class="px-3 py-1.5 rounded-xl bg-[#002424] border border-[#FF6568]/30 text-xs text-[#FF6568] font-bold self-start sm:self-auto">
+            Reter Top 3 • Turnover &lt; 15%
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <!-- 1. OKR -->
+          <div class="p-4 rounded-xl bg-[#001716] border border-[#133B3A] space-y-2">
+            <div class="font-bold text-[#FF6568] flex items-center gap-1.5">
+              <i data-lucide="target" class="w-4 h-4"></i>
+              <span>1. O OKR Definido</span>
+            </div>
+            <p class="text-[#E6E3D3] leading-relaxed">
+              Reter os três melhores vendedores da equipe e reduzir o turnover comercial para <strong>menos de 15% ao ano</strong>, mantendo a fidelidade das contas médicas.
+            </p>
+          </div>
+
+          <!-- 2. Vício -->
+          <div class="p-4 rounded-xl bg-[#001716] border border-[#E2B93B]/30 space-y-2">
+            <div class="font-bold text-[#E2B93B] flex items-center gap-1.5">
+              <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+              <span>2. O que o OKR empurra a fazer</span>
+            </div>
+            <p class="text-[#E6E3D3] leading-relaxed">
+              Ranquear os vendedores simplesmente pelo volume de receita bruta e premiar o topo da lista (Ricardo Aragão R$ 41,2M, Marcelo Bastos R$ 25,5M, Diego Fontes R$ 18,8M).
+            </p>
+          </div>
+
+          <!-- 3. Ponto Cego -->
+          <div class="p-4 rounded-xl bg-[#001716] border border-[#FF6568]/40 space-y-2">
+            <div class="font-bold text-[#FF6568] flex items-center gap-1.5">
+              <i data-lucide="shield-alert" class="w-4 h-4"></i>
+              <span>3. Onde ele erra sozinho (Ponto Cego)</span>
+            </div>
+            <p class="text-[#E6E3D3] leading-relaxed">
+              <strong class="text-[#FF6568]">O ranking por receita premia exatamente quem consome mais capital da empresa!</strong>
+            </p>
+            <p class="text-[#CECABB] text-[11px] leading-relaxed">
+              Ricardo Aragão vendeu R$ 41,2M, mas opera com ciclo de <strong class="text-[#FAF6E6]">220,6 dias</strong>, imobilizando <strong class="text-[#FF6568]">R$ 24,91 Milhões de capital de giro</strong> e gerando <strong class="text-[#FF6568]">R$ 2,41 Milhões de glosas perdidas (5,8%)</strong>! Enquanto isso, Tatiana Coelho (ciclo 121d | 2,0% glosa) e Joana Rios (ciclo 93d | 1,4% glosa) geram muito mais lucro líquido real.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSÃO 3: COO (HEADCOUNT & CAPITAL DE GIRO) -->
+      <div class="fh-card rounded-2xl p-5 sm:p-6 space-y-4 border border-[#E2B93B]/30">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#133B3A] pb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-[#002424] border border-[#E2B93B]/50 flex items-center justify-center text-[#E2B93B] font-extrabold text-sm">
+              COO
+            </div>
+            <div>
+              <span class="text-[10px] uppercase tracking-wider text-[#E2B93B] font-bold">Pergunta Central do COO</span>
+              <h3 class="text-base sm:text-lg font-bold text-[#FAF6E6]">"Quantas pessoas preciso contratar nos próximos cinco anos?"</h3>
+            </div>
+          </div>
+          <div class="px-3 py-1.5 rounded-xl bg-[#002424] border border-[#E2B93B]/30 text-xs text-[#E2B93B] font-bold self-start sm:self-auto">
+            SLA 24x7 sem estourar custo fixo
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <!-- 1. OKR -->
+          <div class="p-4 rounded-xl bg-[#001716] border border-[#133B3A] space-y-2">
+            <div class="font-bold text-[#E2B93B] flex items-center gap-1.5">
+              <i data-lucide="target" class="w-4 h-4"></i>
+              <span>1. O OKR Definido</span>
+            </div>
+            <p class="text-[#E6E3D3] leading-relaxed">
+              Sustentar nível de serviço <strong>24x7</strong> com crescimento de receita sem estourar o custo fixo da operação, garantindo cobertura cirúrgica pontual.
+            </p>
+          </div>
+
+          <!-- 2. Vício -->
+          <div class="p-4 rounded-xl bg-[#001716] border border-[#E2B93B]/30 space-y-2">
+            <div class="font-bold text-[#E2B93B] flex items-center gap-1.5">
+              <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+              <span>2. O que o OKR empurra a fazer</span>
+            </div>
+            <p class="text-[#E6E3D3] leading-relaxed">
+              Dimensionar equipe pela simples projeção de demanda cirúrgica (ex: "se o volume vai dobrar, contratar +20 vendedores, +15 instrumentadores e +8 motoristas").
+            </p>
+          </div>
+
+          <!-- 3. Ponto Cego -->
+          <div class="p-4 rounded-xl bg-[#001716] border border-[#FF6568]/40 space-y-2">
+            <div class="font-bold text-[#FF6568] flex items-center gap-1.5">
+              <i data-lucide="shield-alert" class="w-4 h-4"></i>
+              <span>3. Onde ele erra sozinho (Ponto Cego)</span>
+            </div>
+            <p class="text-[#E6E3D3] leading-relaxed">
+              <strong class="text-[#FF6568]">Contratar vendedor sem capital de giro para bancar a consignação que ele vai gerar é contratar prejuízo!</strong>
+            </p>
+            <p class="text-[#CECABB] text-[11px] leading-relaxed">
+              Cada novo vendedor abre hospitais e exige caixas cirúrgicas consignadas paradas (39,6 dias de consignação média). Contratar 20 vendedores exigiria <strong class="text-[#FAF6E6]">R$ 25M de capital para novos estoques</strong> que a empresa não tem. A solução é <strong class="text-[#2AC59E]">aumentar o giro das caixas existentes com RFID</strong> e contratar apenas especialistas técnicos de apoio!
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===================================================================================== -->
+    <!-- TAB 1: VISÃO GERAL C-SUITE (OVERVIEW) -->
+    <!-- ===================================================================================== -->
+    <div id="tab-overview" class="tab-content space-y-6">
+      
+      <!-- Hero Banner -->
+      <div class="fh-card-highlight rounded-2xl p-5 sm:p-6 relative overflow-hidden">
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1.5">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-[#2AC59E]/20 text-[#2AC59E] border border-[#2AC59E]/40 uppercase tracking-wider">Base FH Saúde (2021-2025)</span>
+              <span class="text-xs text-[#CECABB]">2.371 Negócios Médicos Auditados</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black text-[#FAF6E6] tracking-tight">Painel de Decisão Estratégica Integrada C-Suite</h2>
+            <p class="text-xs sm:text-sm text-[#CECABB] max-w-3xl leading-relaxed">
+              Cruzamento de dados entre Vendas, Finanças, Operações e Logística Cirúrgica para destravar o crescimento autofinanciado de R$ 110M.
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button onclick="switchTab('dilemmas')" class="px-4 py-2.5 rounded-xl bg-[#2AC59E] hover:bg-[#52E1B9] text-[#001716] font-extrabold text-xs flex items-center gap-2 transition-all mint-glow-sm">
+              <i data-lucide="help-circle" class="w-4 h-4"></i>
+              <span>Ver Sessões de Perguntas</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI Summary Cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        
+        <div class="fh-card p-4 rounded-xl space-y-1">
+          <div class="flex items-center justify-between text-[#CECABB] text-xs">
+            <span>Pipeline Total</span>
+            <i data-lucide="layers" class="w-4 h-4 text-[#2AC59E]"></i>
+          </div>
+          <div class="text-base sm:text-lg font-bold text-[#FAF6E6]">R$ 369,25M</div>
+          <div class="text-[10px] text-[#CECABB]">2.371 propostas</div>
+        </div>
+
+        <div class="fh-card p-4 rounded-xl space-y-1">
+          <div class="flex items-center justify-between text-[#CECABB] text-xs">
+            <span>Receita Ganha</span>
+            <i data-lucide="check-circle" class="w-4 h-4 text-[#52E1B9]"></i>
+          </div>
+          <div class="text-base sm:text-lg font-bold text-[#52E1B9]">R$ 176,30M</div>
+          <div class="text-[10px] text-[#52E1B9]/80">1.198 cirurgias (50,5%)</div>
+        </div>
+
+        <div class="fh-card p-4 rounded-xl space-y-1">
+          <div class="flex items-center justify-between text-[#CECABB] text-xs">
+            <span>Valor Perdido</span>
+            <i data-lucide="x-circle" class="w-4 h-4 text-[#FF6568]"></i>
+          </div>
+          <div class="text-base sm:text-lg font-bold text-[#FF6568]">R$ 192,95M</div>
+          <div class="text-[10px] text-[#FF6568]/80">1.173 perdas de funil</div>
+        </div>
+
+        <div class="fh-card p-4 rounded-xl space-y-1">
+          <div class="flex items-center justify-between text-[#CECABB] text-xs">
+            <span>Glosas Totais</span>
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-[#E2B93B]"></i>
+          </div>
+          <div class="text-base sm:text-lg font-bold text-[#E2B93B]">R$ 14,49M</div>
+          <div class="text-[10px] text-[#CECABB]">8,2% da receita bruta</div>
+        </div>
+
+        <div class="fh-card p-4 rounded-xl space-y-1">
+          <div class="flex items-center justify-between text-[#CECABB] text-xs">
+            <span>Glosa Não Recup.</span>
+            <i data-lucide="shield-alert" class="w-4 h-4 text-[#FF6568]"></i>
+          </div>
+          <div class="text-base sm:text-lg font-bold text-[#FF6568]">R$ 7,22M</div>
+          <div class="text-[10px] text-[#FF6568]/80">Perda de caixa real</div>
+        </div>
+
+        <div class="fh-card p-4 rounded-xl space-y-1">
+          <div class="flex items-center justify-between text-[#CECABB] text-xs">
+            <span>Ciclo Médio Total</span>
+            <i data-lucide="clock" class="w-4 h-4 text-[#C2EAE8]"></i>
+          </div>
+          <div class="text-base sm:text-lg font-bold text-[#C2EAE8]">164,7 dias</div>
+          <div class="text-[10px] text-[#CECABB]">Cotação ao Pagamento</div>
+        </div>
+
+      </div>
+
+      <!-- Charts Row -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- YoY Chart -->
+        <div class="fh-card p-5 rounded-2xl space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-sm font-bold text-[#FAF6E6] flex items-center gap-2">
+              <i data-lucide="trending-up" class="w-4 h-4 text-[#2AC59E]"></i>
+              Evolução Anual: Receita Ganha vs Valor Perdido
+            </h4>
+            <span class="text-xs text-[#CECABB]">2021-2025</span>
+          </div>
+          <div class="h-64">
+            <canvas id="chartOverviewYoY"></canvas>
+          </div>
+        </div>
+
+        <!-- Top Losses Pareto -->
+        <div class="fh-card p-5 rounded-2xl space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-sm font-bold text-[#FAF6E6] flex items-center gap-2">
+              <i data-lucide="pie-chart" class="w-4 h-4 text-[#FF6568]"></i>
+              Principais Causas de Perda de Faturamento (R$)
+            </h4>
+            <span class="text-xs text-[#CECABB]">Top 6 Ofensores</span>
+          </div>
+          <div class="h-64">
+            <canvas id="chartOverviewLosses"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ===================================================================================== -->
+    <!-- TAB 2: CEO -->
+    <!-- ===================================================================================== -->
+    <div id="tab-ceo" class="tab-content hidden space-y-6">
+      
+      <!-- CEO Banner -->
+      <div class="fh-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-[#2AC59E] space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#2AC59E]/20 text-[#2AC59E] border border-[#2AC59E]/40 uppercase tracking-wider">Diretriz do CEO</span>
+            <h2 class="text-xl font-bold text-[#FAF6E6] mt-1">Estratégia de Escala: 110 Milhões em 5 Anos Autofinanciados</h2>
+            <p class="text-xs text-[#CECABB]">Como expandir mantendo o controle societário e mitigando o risco de concentração em PE (76,1%).</p>
+          </div>
+          <div class="flex items-center gap-3 bg-[#001716] p-3 rounded-xl border border-[#133B3A]">
+            <div>
+              <div class="text-[10px] text-[#CECABB] uppercase">CAGR Histórico</div>
+              <div class="text-base font-bold text-[#2AC59E]">+19,3% a.a.</div>
+            </div>
+            <div class="h-7 w-px bg-[#133B3A]"></div>
+            <div>
+              <div class="text-[10px] text-[#CECABB] uppercase">Meta 2030</div>
+              <div class="text-base font-bold text-[#52E1B9]">R$ 110,0M</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Regional & Line Charts -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="fh-card p-5 rounded-2xl space-y-3">
+          <h4 class="text-sm font-bold text-[#FAF6E6] flex items-center gap-2">
+            <i data-lucide="map-pin" class="w-4 h-4 text-[#2AC59E]"></i>
+            Concentração de Receita por Estado (Nordeste)
+          </h4>
+          <div class="h-64">
+            <canvas id="chartCeoStates"></canvas>
+          </div>
+        </div>
+        <div class="fh-card p-5 rounded-2xl space-y-3">
+          <h4 class="text-sm font-bold text-[#FAF6E6] flex items-center gap-2">
+            <i data-lucide="pie-chart" class="w-4 h-4 text-[#C2EAE8]"></i>
+            Participação por Linha de Especialidade Médica
+          </h4>
+          <div class="h-64">
+            <canvas id="chartCeoLines"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===================================================================================== -->
+    <!-- TAB 3: CFO -->
+    <!-- ===================================================================================== -->
+    <div id="tab-cfo" class="tab-content hidden space-y-6">
+      
+      <div class="fh-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-[#52E1B9] space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#2AC59E]/20 text-[#52E1B9] border border-[#2AC59E]/40 uppercase tracking-wider">Diretriz do CFO</span>
+            <h2 class="text-xl font-bold text-[#FAF6E6] mt-1">Glosas Hospitalares, DSO de 125 Dias & Capital de Giro</h2>
+            <p class="text-xs text-[#CECABB]">Operadoras verticalizadas geram 67,5% das perdas de glosa da empresa e demoram 135,7 dias para pagar.</p>
+          </div>
+          <div class="flex items-center gap-3 bg-[#001716] p-3 rounded-xl border border-[#133B3A]">
+            <div>
+              <div class="text-[10px] text-[#CECABB] uppercase">Glosa Não Recup.</div>
+              <div class="text-base font-bold text-[#FF6568]">R$ 7,22M</div>
+            </div>
+            <div class="h-7 w-px bg-[#133B3A]"></div>
+            <div>
+              <div class="text-[10px] text-[#CECABB] uppercase">DSO Geral</div>
+              <div class="text-base font-bold text-[#E2B93B]">125,1 dias</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="fh-card p-5 rounded-2xl space-y-3">
+          <h4 class="text-sm font-bold text-[#FAF6E6] flex items-center gap-2">
+            <i data-lucide="bar-chart-2" class="w-4 h-4 text-[#2AC59E]"></i>
+            Glosas Totais vs Glosas Perdidas por Tipo de Pagador (R$)
+          </h4>
+          <div class="h-64">
+            <canvas id="chartCfoGlosas"></canvas>
+          </div>
+        </div>
+        <div class="fh-card p-5 rounded-2xl space-y-3">
+          <h4 class="text-sm font-bold text-[#FAF6E6] flex items-center gap-2">
+            <i data-lucide="calendar" class="w-4 h-4 text-[#E2B93B]"></i>
+            Prazo Médio de Recebimento (DSO) por Tipo de Pagador
+          </h4>
+          <div class="h-64">
+            <canvas id="chartCfoDso"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===================================================================================== -->
+    <!-- TAB 4: COO -->
+    <!-- ===================================================================================== -->
+    <div id="tab-coo" class="tab-content hidden space-y-6">
+      
+      <div class="fh-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-[#E2B93B] space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#E2B93B]/20 text-[#E2B93B] border border-[#E2B93B]/40 uppercase tracking-wider">Diretriz do COO</span>
+            <h2 class="text-xl font-bold text-[#FAF6E6] mt-1">Eficiência da Esteira Cirúrgica & Alavancagem de Headcount</h2>
+            <p class="text-xs text-[#CECABB]">Gargalo de 58 dias entre cirurgia e faturamento e a redução do tempo de consignação para liberar estoque existente.</p>
+          </div>
+          <div class="flex items-center gap-3 bg-[#001716] p-3 rounded-xl border border-[#133B3A]">
+            <div>
+              <div class="text-[10px] text-[#CECABB] uppercase">Cirurgia ➔ Fat.</div>
+              <div class="text-base font-bold text-[#FF6568]">58,0 dias</div>
+            </div>
+            <div class="h-7 w-px bg-[#133B3A]"></div>
+            <div>
+              <div class="text-[10px] text-[#CECABB] uppercase">Consignação</div>
+              <div class="text-base font-bold text-[#E2B93B]">39,6 dias</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="fh-card p-5 rounded-2xl space-y-3">
+          <h4 class="text-sm font-bold text-[#FAF6E6] flex items-center gap-2">
+            <i data-lucide="funnel" class="w-4 h-4 text-[#E2B93B]"></i>
+            Perda Financeira por Etapa do Funil (R$)
+          </h4>
+          <div class="h-64">
+            <canvas id="chartCooStages"></canvas>
+          </div>
+        </div>
+        <div class="fh-card p-5 rounded-2xl space-y-3">
+          <h4 class="text-sm font-bold text-[#FAF6E6] flex items-center gap-2">
+            <i data-lucide="alert-octagon" class="w-4 h-4 text-[#FF6568]"></i>
+            Perdas Operacionais & Logísticas (R$)
+          </h4>
+          <div class="h-64">
+            <canvas id="chartCooOperationalLosses"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===================================================================================== -->
+    <!-- TAB 5: CHRO -->
+    <!-- ===================================================================================== -->
+    <div id="tab-chro" class="tab-content hidden space-y-6">
+      
+      <div class="fh-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-[#FF6568] space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#FF6568]/20 text-[#FF6568] border border-[#FF6568]/40 uppercase tracking-wider">Diretriz do CHRO</span>
+            <h2 class="text-xl font-bold text-[#FAF6E6] mt-1">Produtividade Real vs Consumo de Capital por Vendedor</h2>
+            <p class="text-xs text-[#CECABB]">Por que premiar por receita bruta engana a diretoria e consome o caixa da empresa.</p>
+          </div>
+          <div class="flex items-center gap-3 bg-[#001716] p-3 rounded-xl border border-[#133B3A]">
+            <div>
+              <div class="text-[10px] text-[#CECABB] uppercase">Top 3 Vendas</div>
+              <div class="text-base font-bold text-[#FF6568]">48,5%</div>
+            </div>
+            <div class="h-7 w-px bg-[#133B3A]"></div>
+            <div>
+              <div class="text-[10px] text-[#CECABB] uppercase">Capital Preso Top 3</div>
+              <div class="text-base font-bold text-[#FAF6E6]">R$ 46,8M</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="fh-card p-5 rounded-2xl space-y-3">
+          <h4 class="text-sm font-bold text-[#FAF6E6] flex items-center gap-2">
+            <i data-lucide="award" class="w-4 h-4 text-[#FF6568]"></i>
+            Ranking de Receita Ganha por Vendedor (R$ Milhões)
+          </h4>
+          <div class="h-64">
+            <canvas id="chartChroRevenue"></canvas>
+          </div>
+        </div>
+        <div class="fh-card p-5 rounded-2xl space-y-3">
+          <h4 class="text-sm font-bold text-[#FAF6E6] flex items-center gap-2">
+            <i data-lucide="percent" class="w-4 h-4 text-[#2AC59E]"></i>
+            Win Rate (%) vs Taxa de Glosa Perdida (%)
+          </h4>
+          <div class="h-64">
+            <canvas id="chartChroWinRate"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seller Table -->
+      <div class="fh-card rounded-2xl p-5 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h4 class="text-sm font-bold text-[#FAF6E6] flex items-center gap-2">
+              <i data-lucide="users" class="w-4 h-4 text-[#FF6568]"></i>
+              Tabela de Produtividade, Qualidade & Consumo de Capital de Giro
+            </h4>
+            <p class="text-xs text-[#CECABB]">Mostra o capital de giro imobilizado por cada vendedor nos hospitais</p>
+          </div>
+          <input type="text" id="sellerSearch" onkeyup="filterSellerTable()" placeholder="Buscar vendedor..." class="px-3 py-1.5 bg-[#001716] border border-[#133B3A] rounded-xl text-xs text-[#FAF6E6] focus:outline-none focus:border-[#2AC59E]">
+        </div>
+        <div class="overflow-x-auto max-h-96">
+          <table class="w-full text-xs text-left" id="sellerTable">
+            <thead class="bg-[#002424] text-[#CECABB] uppercase text-[10px] tracking-wider border-b border-[#133B3A] sticky top-0">
+              <tr>
+                <th class="py-2.5 px-3">Vendedor</th>
+                <th class="py-2.5 px-3 text-right">Deals</th>
+                <th class="py-2.5 px-3 text-right">Win Rate</th>
+                <th class="py-2.5 px-3 text-right">Receita Bruta</th>
+                <th class="py-2.5 px-3 text-right">Glosa Perdida</th>
+                <th class="py-2.5 px-3 text-right">% Glosa</th>
+                <th class="py-2.5 px-3 text-right">DSO Médio</th>
+                <th class="py-2.5 px-3 text-right">Ciclo Médio</th>
+                <th class="py-2.5 px-3 text-right text-[#E2B93B]">Capital Preso Est.</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#133B3A]/60 font-medium">
+
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Ricardo Aragão</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">383</td>
+                <td class="py-2.5 px-3 text-right text-[#E2B93B]">48.3%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 41,209,709.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 2,407,846.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568] font-bold">5.8%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">158.4d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">220.6d</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568] font-bold">R$ 24.91M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Marcelo Bastos</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">294</td>
+                <td class="py-2.5 px-3 text-right text-[#E2B93B]">48.3%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 25,464,927.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 1,098,241.00</td>
+                <td class="py-2.5 px-3 text-right text-[#E2B93B]">4.3%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">130.2d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">172.5d</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568] font-bold">R$ 12.03M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Diego Fontes</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">225</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">47.1%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 18,829,700.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 889,932.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568] font-bold">4.7%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">142.2d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">191.5d</td>
+                <td class="py-2.5 px-3 text-right text-[#E2B93B]">R$ 9.88M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Rogério Lins</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">232</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9] font-bold">56.0%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 17,016,028.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 581,096.00</td>
+                <td class="py-2.5 px-3 text-right text-[#E2B93B]">3.4%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">123.8d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">162.8d</td>
+                <td class="py-2.5 px-3 text-right text-[#E2B93B]">R$ 7.59M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Tatiana Coelho</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">255</td>
+                <td class="py-2.5 px-3 text-right text-[#E2B93B]">49.4%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 14,325,786.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 285,663.00</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">2.0%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">97.9d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">121.0d</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">R$ 4.75M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Paulo Menezes</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">224</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9] font-bold">54.0%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 12,870,263.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 428,130.00</td>
+                <td class="py-2.5 px-3 text-right text-[#E2B93B]">3.3%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">116.5d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">151.7d</td>
+                <td class="py-2.5 px-3 text-right text-[#E2B93B]">R$ 5.35M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Cíntia Barbosa</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">146</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9] font-bold">54.8%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 9,748,703.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 217,559.00</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">2.2%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">112.0d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">136.4d</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">R$ 3.64M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Luciana Prado</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">101</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9] font-bold">60.4%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 7,273,293.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 204,730.00</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">2.8%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">111.4d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">143.8d</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">R$ 2.87M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Joana Rios</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">150</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">46.7%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 6,707,086.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 92,932.00</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">1.4%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">77.8d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">93.2d</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">R$ 1.71M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Márcia Duarte</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">94</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">47.9%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 5,996,502.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 209,008.00</td>
+                <td class="py-2.5 px-3 text-right text-[#E2B93B]">3.5%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">121.0d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">158.0d</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">R$ 2.60M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Fábio Correia</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">61</td>
+                <td class="py-2.5 px-3 text-right text-[#E2B93B]">52.5%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 5,118,748.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 270,548.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568] font-bold">5.3%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">151.2d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">202.2d</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">R$ 2.84M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Ivan Peixoto</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">57</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">47.4%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 5,030,073.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 273,675.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568] font-bold">5.4%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">158.5d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">216.0d</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">R$ 2.98M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Sérgio Tavares</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">62</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">45.2%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 3,554,203.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 181,319.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568] font-bold">5.1%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">135.3d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">178.6d</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">R$ 1.74M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Verônica Sá</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">62</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">45.2%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 2,066,915.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 51,453.00</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">2.5%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">109.0d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">139.4d</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">R$ 0.79M</td>
+              </tr>
+              <tr class="hover:bg-[#002424]/40 transition-colors">
+                <td class="py-2.5 px-3 font-bold text-[#FAF6E6]">Anderson Melo</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">25</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9] font-bold">68.0%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-[#52E1B9]">R$ 1,088,074.00</td>
+                <td class="py-2.5 px-3 text-right text-[#FF6568]">R$ 31,700.00</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">2.9%</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">110.5d</td>
+                <td class="py-2.5 px-3 text-right text-[#CECABB]">140.8d</td>
+                <td class="py-2.5 px-3 text-right text-[#52E1B9]">R$ 0.42M</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===================================================================================== -->
+    <!-- TAB 6: CMO -->
+    <!-- ===================================================================================== -->
+    <div id="tab-cmo" class="tab-content hidden space-y-6">
+      
+      <div class="fh-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-[#C2EAE8] space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#C2EAE8]/20 text-[#C2EAE8] border border-[#C2EAE8]/40 uppercase tracking-wider">Diretriz do CMO</span>
+            <h2 class="text-xl font-bold text-[#FAF6E6] mt-1">Mix de Portfólio & Neutralização de Perdas por Preço</h2>
+            <p class="text-xs text-[#CECABB]">Criação de pacotes cirúrgicos (Bundling) para combater os R$ 37,56M perdidos por preço e programas de fidelização médica.</p>
+          </div>
+          <div class="flex items-center gap-3 bg-[#001716] p-3 rounded-xl border border-[#133B3A]">
+            <div>
+              <div class="text-[10px] text-[#CECABB] uppercase">Perda por Preço</div>
+              <div class="text-base font-bold text-[#FF6568]">R$ 37,56M</div>
+            </div>
+            <div class="h-7 w-px bg-[#133B3A]"></div>
+            <div>
+              <div class="text-[10px] text-[#CECABB] uppercase">Top Produto</div>
+              <div class="text-base font-bold text-[#52E1B9]">Implante Quadril</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="fh-card p-5 rounded-2xl space-y-3">
+          <h4 class="text-sm font-bold text-[#FAF6E6] flex items-center gap-2">
+            <i data-lucide="package" class="w-4 h-4 text-[#C2EAE8]"></i>
+            Receita Ganha por Produto (R$ Milhões)
+          </h4>
+          <div class="h-64">
+            <canvas id="chartCmoProducts"></canvas>
+          </div>
+        </div>
+        <div class="fh-card p-5 rounded-2xl space-y-3">
+          <h4 class="text-sm font-bold text-[#FAF6E6] flex items-center gap-2">
+            <i data-lucide="bar-chart" class="w-4 h-4 text-[#FF6568]"></i>
+            Pareto de Motivos de Perda de Negócios (R$ Milhões)
+          </h4>
+          <div class="h-64">
+            <canvas id="chartCmoLossPareto"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer Bar -->
+  <footer class="border-t border-[#133B3A] bg-[#001716] py-5 text-center text-xs text-[#CECABB]">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#2AC59E]"></span>
+        <span class="font-bold text-[#FAF6E6]">FH DATA</span>
+        <span class="text-[#CECABB]/60">• Inteligência Estratégica C-Suite</span>
+      </div>
+      <div>
+        <span>Design e Paleta inspirados em fhdata.com.br</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    const dataBundle = {"summary": {"total_deals": 2371, "deals_ganhos": 1198, "deals_perdidos": 1173, "win_rate": 50.53, "valor_pipeline": 369251834.0, "receita_ganha": 176300010.0, "valor_perdido": 192951824.0, "valor_glosado": 14491875.0, "valor_recuperado": 7268043.0, "glosa_nao_recuperada": 7223832.0, "receita_liquida": 169076178.0, "ticket_medio": 147161.94, "taxa_recuperacao_glosa": 50.15}, "years": [{"ano": "2021", "deals": 367, "ganhos": 184, "perdidos": 183, "win_rate": 50.1, "receita_ganha": 24000000.0, "receita_liquida": 22924299.0, "valor_perdido": 25660779.0, "valor_glosado": 2053990.0, "valor_recuperado": 978289.0, "glosa_nao_recuperada": 1075701.0, "taxa_glosa": 8.6, "ticket_medio": 130434.78}, {"ano": "2022", "deals": 428, "ganhos": 205, "perdidos": 223, "win_rate": 47.9, "receita_ganha": 28499994.0, "receita_liquida": 27338922.0, "valor_perdido": 33323050.0, "valor_glosado": 2348591.0, "valor_recuperado": 1187519.0, "glosa_nao_recuperada": 1161072.0, "taxa_glosa": 8.2, "ticket_medio": 139024.36}, {"ano": "2023", "deals": 476, "ganhos": 244, "perdidos": 232, "win_rate": 51.3, "receita_ganha": 34000009.0, "receita_liquida": 32567006.0, "valor_perdido": 37475452.0, "valor_glosado": 2763704.0, "valor_recuperado": 1330701.0, "glosa_nao_recuperada": 1433003.0, "taxa_glosa": 8.1, "ticket_medio": 139344.3}, {"ano": "2024", "deals": 536, "ganhos": 276, "perdidos": 260, "win_rate": 51.5, "receita_ganha": 41200008.0, "receita_liquida": 39566209.0, "valor_perdido": 48887571.0, "valor_glosado": 3369990.0, "valor_recuperado": 1736191.0, "glosa_nao_recuperada": 1633799.0, "taxa_glosa": 8.2, "ticket_medio": 149275.39}, {"ano": "2025", "deals": 564, "ganhos": 289, "perdidos": 275, "win_rate": 51.2, "receita_ganha": 48599999.0, "receita_liquida": 46679742.0, "valor_perdido": 47604972.0, "valor_glosado": 3955600.0, "valor_recuperado": 2035343.0, "glosa_nao_recuperada": 1920257.0, "taxa_glosa": 8.1, "ticket_medio": 168166.09}], "months": [{"mes": "2021-01", "deals": 16, "ganhos": 6, "receita": 1039879.0, "receita_liquida": 961832.0, "win_rate": 37.5}, {"mes": "2021-02", "deals": 36, "ganhos": 16, "receita": 1822943.0, "receita_liquida": 1732995.0, "win_rate": 44.4}, {"mes": "2021-03", "deals": 49, "ganhos": 30, "receita": 3767936.0, "receita_liquida": 3622075.0, "win_rate": 61.2}, {"mes": "2021-04", "deals": 27, "ganhos": 13, "receita": 2044647.0, "receita_liquida": 1955572.0, "win_rate": 48.1}, {"mes": "2021-05", "deals": 31, "ganhos": 14, "receita": 1665134.0, "receita_liquida": 1567799.0, "win_rate": 45.2}, {"mes": "2021-06", "deals": 27, "ganhos": 14, "receita": 2454650.0, "receita_liquida": 2361065.0, "win_rate": 51.9}, {"mes": "2021-07", "deals": 32, "ganhos": 21, "receita": 2835689.0, "receita_liquida": 2693775.0, "win_rate": 65.6}, {"mes": "2021-08", "deals": 30, "ganhos": 17, "receita": 2192108.0, "receita_liquida": 2101552.0, "win_rate": 56.7}, {"mes": "2021-09", "deals": 31, "ganhos": 14, "receita": 1374071.0, "receita_liquida": 1323516.0, "win_rate": 45.2}, {"mes": "2021-10", "deals": 29, "ganhos": 14, "receita": 1707158.0, "receita_liquida": 1636745.0, "win_rate": 48.3}, {"mes": "2021-11", "deals": 25, "ganhos": 9, "receita": 935740.0, "receita_liquida": 910247.0, "win_rate": 36.0}, {"mes": "2021-12", "deals": 34, "ganhos": 16, "receita": 2160045.0, "receita_liquida": 2057126.0, "win_rate": 47.1}, {"mes": "2022-01", "deals": 29, "ganhos": 11, "receita": 1230115.0, "receita_liquida": 1185186.0, "win_rate": 37.9}, {"mes": "2022-02", "deals": 45, "ganhos": 24, "receita": 3003945.0, "receita_liquida": 2845668.0, "win_rate": 53.3}, {"mes": "2022-03", "deals": 35, "ganhos": 16, "receita": 2129819.0, "receita_liquida": 2060836.0, "win_rate": 45.7}, {"mes": "2022-04", "deals": 45, "ganhos": 19, "receita": 3104086.0, "receita_liquida": 2963436.0, "win_rate": 42.2}, {"mes": "2022-05", "deals": 44, "ganhos": 19, "receita": 2209935.0, "receita_liquida": 2123405.0, "win_rate": 43.2}, {"mes": "2022-06", "deals": 43, "ganhos": 22, "receita": 3030806.0, "receita_liquida": 2911602.0, "win_rate": 51.2}, {"mes": "2022-07", "deals": 40, "ganhos": 20, "receita": 2778376.0, "receita_liquida": 2684944.0, "win_rate": 50.0}, {"mes": "2022-08", "deals": 34, "ganhos": 19, "receita": 3446034.0, "receita_liquida": 3269066.0, "win_rate": 55.9}, {"mes": "2022-09", "deals": 35, "ganhos": 19, "receita": 2469852.0, "receita_liquida": 2367436.0, "win_rate": 54.3}, {"mes": "2022-10", "deals": 32, "ganhos": 17, "receita": 2068502.0, "receita_liquida": 1994621.0, "win_rate": 53.1}, {"mes": "2022-11", "deals": 17, "ganhos": 8, "receita": 1598735.0, "receita_liquida": 1541451.0, "win_rate": 47.1}, {"mes": "2022-12", "deals": 29, "ganhos": 11, "receita": 1429789.0, "receita_liquida": 1391271.0, "win_rate": 37.9}, {"mes": "2023-01", "deals": 29, "ganhos": 15, "receita": 1771837.0, "receita_liquida": 1703084.0, "win_rate": 51.7}, {"mes": "2023-02", "deals": 39, "ganhos": 17, "receita": 1594631.0, "receita_liquida": 1539391.0, "win_rate": 43.6}, {"mes": "2023-03", "deals": 43, "ganhos": 29, "receita": 3378404.0, "receita_liquida": 3244248.0, "win_rate": 67.4}, {"mes": "2023-04", "deals": 35, "ganhos": 17, "receita": 1921808.0, "receita_liquida": 1822358.0, "win_rate": 48.6}, {"mes": "2023-05", "deals": 46, "ganhos": 23, "receita": 2967936.0, "receita_liquida": 2855310.0, "win_rate": 50.0}, {"mes": "2023-06", "deals": 35, "ganhos": 21, "receita": 1869722.0, "receita_liquida": 1793960.0, "win_rate": 60.0}, {"mes": "2023-07", "deals": 46, "ganhos": 23, "receita": 3573890.0, "receita_liquida": 3441946.0, "win_rate": 50.0}, {"mes": "2023-08", "deals": 43, "ganhos": 27, "receita": 4341185.0, "receita_liquida": 4113683.0, "win_rate": 62.8}, {"mes": "2023-09", "deals": 37, "ganhos": 22, "receita": 4138568.0, "receita_liquida": 3931047.0, "win_rate": 59.5}, {"mes": "2023-10", "deals": 42, "ganhos": 17, "receita": 3440497.0, "receita_liquida": 3279037.0, "win_rate": 40.5}, {"mes": "2023-11", "deals": 37, "ganhos": 16, "receita": 2970138.0, "receita_liquida": 2869850.0, "win_rate": 43.2}, {"mes": "2023-12", "deals": 44, "ganhos": 17, "receita": 2031393.0, "receita_liquida": 1973092.0, "win_rate": 38.6}, {"mes": "2024-01", "deals": 42, "ganhos": 15, "receita": 3043244.0, "receita_liquida": 2921276.0, "win_rate": 35.7}, {"mes": "2024-02", "deals": 37, "ganhos": 18, "receita": 2898558.0, "receita_liquida": 2744542.0, "win_rate": 48.6}, {"mes": "2024-03", "deals": 57, "ganhos": 28, "receita": 2649678.0, "receita_liquida": 2513035.0, "win_rate": 49.1}, {"mes": "2024-04", "deals": 44, "ganhos": 27, "receita": 4743129.0, "receita_liquida": 4548915.0, "win_rate": 61.4}, {"mes": "2024-05", "deals": 49, "ganhos": 26, "receita": 4882421.0, "receita_liquida": 4696022.0, "win_rate": 53.1}, {"mes": "2024-06", "deals": 48, "ganhos": 24, "receita": 4235523.0, "receita_liquida": 4071421.0, "win_rate": 50.0}, {"mes": "2024-07", "deals": 47, "ganhos": 23, "receita": 3310539.0, "receita_liquida": 3195751.0, "win_rate": 48.9}, {"mes": "2024-08", "deals": 47, "ganhos": 25, "receita": 2945561.0, "receita_liquida": 2839642.0, "win_rate": 53.2}, {"mes": "2024-09", "deals": 46, "ganhos": 28, "receita": 3720569.0, "receita_liquida": 3571313.0, "win_rate": 60.9}, {"mes": "2024-10", "deals": 46, "ganhos": 22, "receita": 2591582.0, "receita_liquida": 2501983.0, "win_rate": 47.8}, {"mes": "2024-11", "deals": 37, "ganhos": 22, "receita": 3825028.0, "receita_liquida": 3675783.0, "win_rate": 59.5}, {"mes": "2024-12", "deals": 36, "ganhos": 18, "receita": 2354176.0, "receita_liquida": 2286526.0, "win_rate": 50.0}, {"mes": "2025-01", "deals": 35, "ganhos": 16, "receita": 2477604.0, "receita_liquida": 2386749.0, "win_rate": 45.7}, {"mes": "2025-02", "deals": 43, "ganhos": 21, "receita": 1985609.0, "receita_liquida": 1906172.0, "win_rate": 48.8}, {"mes": "2025-03", "deals": 64, "ganhos": 34, "receita": 6072990.0, "receita_liquida": 5826139.0, "win_rate": 53.1}, {"mes": "2025-04", "deals": 51, "ganhos": 30, "receita": 4909912.0, "receita_liquida": 4717954.0, "win_rate": 58.8}, {"mes": "2025-05", "deals": 32, "ganhos": 17, "receita": 1918015.0, "receita_liquida": 1830990.0, "win_rate": 53.1}, {"mes": "2025-06", "deals": 48, "ganhos": 18, "receita": 4373372.0, "receita_liquida": 4244797.0, "win_rate": 37.5}, {"mes": "2025-07", "deals": 58, "ganhos": 25, "receita": 4834228.0, "receita_liquida": 4593660.0, "win_rate": 43.1}, {"mes": "2025-08", "deals": 48, "ganhos": 25, "receita": 4325368.0, "receita_liquida": 4147789.0, "win_rate": 52.1}, {"mes": "2025-09", "deals": 37, "ganhos": 17, "receita": 4179893.0, "receita_liquida": 4051516.0, "win_rate": 45.9}, {"mes": "2025-10", "deals": 47, "ganhos": 25, "receita": 4247673.0, "receita_liquida": 4073443.0, "win_rate": 53.2}, {"mes": "2025-11", "deals": 45, "ganhos": 28, "receita": 4815503.0, "receita_liquida": 4610760.0, "win_rate": 62.2}, {"mes": "2025-12", "deals": 56, "ganhos": 33, "receita": 4459832.0, "receita_liquida": 4289773.0, "win_rate": 58.9}], "payers": [{"tipo": "Operadora verticalizada", "deals": 1070, "ganhos": 535, "perdidos": 535, "win_rate": 50.0, "receita_ganha": 107085111.0, "receita_liquida": 102208624.0, "valor_perdido": 114318666.0, "valor_glosado": 9764813.0, "valor_recuperado": 4888326.0, "glosa_nao_recuperada": 4876487.0, "taxa_glosa": 9.1, "taxa_recuperacao": 50.1, "dias_pagamento_medio": 135.7, "dias_consignacao_medio": 45.8}, {"tipo": "Hospital privado", "deals": 723, "ganhos": 371, "perdidos": 352, "win_rate": 51.3, "receita_ganha": 31160994.0, "receita_liquida": 30156560.0, "valor_perdido": 34079963.0, "valor_glosado": 2010345.0, "valor_recuperado": 1005911.0, "glosa_nao_recuperada": 1004434.0, "taxa_glosa": 6.5, "taxa_recuperacao": 50.0, "dias_pagamento_medio": 112.4, "dias_consignacao_medio": 32.9}, {"tipo": "Operadora não verticalizada", "deals": 338, "ganhos": 170, "perdidos": 168, "win_rate": 50.3, "receita_ganha": 22540251.0, "receita_liquida": 21684112.0, "valor_perdido": 25847364.0, "valor_glosado": 1697229.0, "valor_recuperado": 841090.0, "glosa_nao_recuperada": 856139.0, "taxa_glosa": 7.5, "taxa_recuperacao": 49.6, "dias_pagamento_medio": 124.2, "dias_consignacao_medio": 38.3}, {"tipo": "Hospital público", "deals": 240, "ganhos": 122, "perdidos": 118, "win_rate": 50.8, "receita_ganha": 15513654.0, "receita_liquida": 15026882.0, "valor_perdido": 18705831.0, "valor_glosado": 1019488.0, "valor_recuperado": 532716.0, "glosa_nao_recuperada": 486772.0, "taxa_glosa": 6.6, "taxa_recuperacao": 52.3, "dias_pagamento_medio": 118.8, "dias_consignacao_medio": 34.1}], "states": [{"estado": "PE", "deals": 1676, "ganhos": 829, "perdidos": 847, "win_rate": 49.5, "receita_ganha": 134197933.0, "receita_liquida": 128506616.0, "glosa_nao_recuperada": 5691317.0, "dias_pagamento_medio": 127.8, "dias_consignacao_medio": 41.2}, {"estado": "AL", "deals": 356, "ganhos": 205, "perdidos": 151, "win_rate": 57.6, "receita_ganha": 22922302.0, "receita_liquida": 22043872.0, "glosa_nao_recuperada": 878430.0, "dias_pagamento_medio": 120.4, "dias_consignacao_medio": 36.3}, {"estado": "RN", "deals": 223, "ganhos": 110, "perdidos": 113, "win_rate": 49.3, "receita_ganha": 13845416.0, "receita_liquida": 13350911.0, "glosa_nao_recuperada": 494505.0, "dias_pagamento_medio": 119.9, "dias_consignacao_medio": 35.9}, {"estado": "PB", "deals": 116, "ganhos": 54, "perdidos": 62, "win_rate": 46.6, "receita_ganha": 5334359.0, "receita_liquida": 5174779.0, "glosa_nao_recuperada": 159580.0, "dias_pagamento_medio": 112.3, "dias_consignacao_medio": 34.5}], "lines": [{"linha": "Ortopedia", "deals": 1308, "ganhos": 647, "perdidos": 661, "win_rate": 49.5, "receita_ganha": 93073473.0, "receita_liquida": 89185512.0, "valor_perdido": 102310392.0, "valor_glosado": 7877547.0, "glosa_nao_recuperada": 3887961.0, "ticket_medio": 143853.9}, {"linha": "Cardiologia", "deals": 686, "ganhos": 355, "perdidos": 331, "win_rate": 51.7, "receita_ganha": 68572051.0, "receita_liquida": 65836474.0, "valor_perdido": 75204593.0, "valor_glosado": 5463889.0, "glosa_nao_recuperada": 2735577.0, "ticket_medio": 193160.71}, {"linha": "Cirurgia geral", "deals": 377, "ganhos": 196, "perdidos": 181, "win_rate": 52.0, "receita_ganha": 14654486.0, "receita_liquida": 14054192.0, "valor_perdido": 15436839.0, "valor_glosado": 1150439.0, "glosa_nao_recuperada": 600294.0, "ticket_medio": 74767.79}], "products": [{"produto": "Implante de quadril", "linha": "Ortopedia", "deals": 328, "ganhos": 173, "perdidos": 155, "win_rate": 52.7, "receita_ganha": 25455963.0, "receita_liquida": 24415901.0, "valor_perdido": 20937236.0, "valor_glosado": 2062918.0, "glosa_nao_recuperada": 1040062.0, "ticket_medio": 147144.29}, {"produto": "Stent farmacológico", "linha": "Cardiologia", "deals": 205, "ganhos": 104, "perdidos": 101, "win_rate": 50.7, "receita_ganha": 21235981.0, "receita_liquida": 20433513.0, "valor_perdido": 23288487.0, "valor_glosado": 1729286.0, "glosa_nao_recuperada": 802468.0, "ticket_medio": 204192.12}, {"produto": "Placas e parafusos", "linha": "Ortopedia", "deals": 266, "ganhos": 125, "perdidos": 141, "win_rate": 47.0, "receita_ganha": 20477528.0, "receita_liquida": 19606733.0, "valor_perdido": 21326686.0, "valor_glosado": 1791024.0, "glosa_nao_recuperada": 870795.0, "ticket_medio": 163820.22}, {"produto": "Implante de joelho", "linha": "Ortopedia", "deals": 264, "ganhos": 134, "perdidos": 130, "win_rate": 50.8, "receita_ganha": 20126759.0, "receita_liquida": 19227584.0, "valor_perdido": 22275207.0, "valor_glosado": 1761695.0, "glosa_nao_recuperada": 899175.0, "ticket_medio": 150199.69}, {"produto": "Cateter para angioplastia", "linha": "Cardiologia", "deals": 186, "ganhos": 90, "perdidos": 96, "win_rate": 48.4, "receita_ganha": 18128430.0, "receita_liquida": 17451656.0, "valor_perdido": 20700821.0, "valor_glosado": 1267000.0, "glosa_nao_recuperada": 676774.0, "ticket_medio": 201427.0}, {"produto": "Marcapasso", "linha": "Cardiologia", "deals": 163, "ganhos": 90, "perdidos": 73, "win_rate": 55.2, "receita_ganha": 15783829.0, "receita_liquida": 15092023.0, "valor_perdido": 17452201.0, "valor_glosado": 1375256.0, "glosa_nao_recuperada": 691806.0, "ticket_medio": 175375.88}, {"produto": "Material para artroscopia", "linha": "Ortopedia", "deals": 245, "ganhos": 130, "perdidos": 115, "win_rate": 53.1, "receita_ganha": 15628215.0, "receita_liquida": 15011475.0, "valor_perdido": 18833826.0, "valor_glosado": 1314046.0, "glosa_nao_recuperada": 616740.0, "ticket_medio": 120217.04}, {"produto": "Introdutor e guia", "linha": "Cardiologia", "deals": 132, "ganhos": 71, "perdidos": 61, "win_rate": 53.8, "receita_ganha": 13423811.0, "receita_liquida": 12859282.0, "valor_perdido": 13763084.0, "valor_glosado": 1092347.0, "glosa_nao_recuperada": 564529.0, "ticket_medio": 189067.76}, {"produto": "Haste intramedular", "linha": "Ortopedia", "deals": 205, "ganhos": 85, "perdidos": 120, "win_rate": 41.5, "receita_ganha": 11385008.0, "receita_liquida": 10923819.0, "valor_perdido": 18937437.0, "valor_glosado": 947864.0, "glosa_nao_recuperada": 461189.0, "ticket_medio": 133941.27}, {"produto": "Grampeador cirúrgico", "linha": "Cirurgia geral", "deals": 148, "ganhos": 73, "perdidos": 75, "win_rate": 49.3, "receita_ganha": 5787754.0, "receita_liquida": 5557501.0, "valor_perdido": 7271198.0, "valor_glosado": 447842.0, "glosa_nao_recuperada": 230253.0, "ticket_medio": 79284.3}, {"produto": "Malha e tela cirúrgica", "linha": "Cirurgia geral", "deals": 128, "ganhos": 70, "perdidos": 58, "win_rate": 54.7, "receita_ganha": 5655344.0, "receita_liquida": 5401382.0, "valor_perdido": 3662181.0, "valor_glosado": 463109.0, "glosa_nao_recuperada": 253962.0, "ticket_medio": 80790.63}, {"produto": "Kit de consumo cirúrgico", "linha": "Cirurgia geral", "deals": 101, "ganhos": 53, "perdidos": 48, "win_rate": 52.5, "receita_ganha": 3211388.0, "receita_liquida": 3095309.0, "valor_perdido": 4503460.0, "valor_glosado": 239488.0, "glosa_nao_recuperada": 116079.0, "ticket_medio": 60592.23}], "sellers": [{"vendedor": "Ricardo Aragão", "deals": 383, "ganhos": 185, "perdidos": 198, "win_rate": 48.3, "receita_ganha": 41209709.0, "receita_liquida": 38801863.0, "valor_perdido": 49146629.0, "valor_glosado": 4800027.0, "valor_recuperado": 2392181.0, "glosa_nao_recuperada": 2407846.0, "taxa_glosa_perdida": 5.8, "ticket_medio": 222755.18, "principais_perdas": "Preço acima do concorrente (42), Cliente com fornecedor exclusivo (24)"}, {"vendedor": "Marcelo Bastos", "deals": 294, "ganhos": 142, "perdidos": 152, "win_rate": 48.3, "receita_ganha": 25464927.0, "receita_liquida": 24366686.0, "valor_perdido": 32046637.0, "valor_glosado": 2141668.0, "valor_recuperado": 1043427.0, "glosa_nao_recuperada": 1098241.0, "taxa_glosa_perdida": 4.3, "ticket_medio": 179330.47, "principais_perdas": "Cliente com fornecedor exclusivo (30), Preço acima do concorrente (28)"}, {"vendedor": "Diego Fontes", "deals": 225, "ganhos": 106, "perdidos": 119, "win_rate": 47.1, "receita_ganha": 18829700.0, "receita_liquida": 17939768.0, "valor_perdido": 21356321.0, "valor_glosado": 1864039.0, "valor_recuperado": 974107.0, "glosa_nao_recuperada": 889932.0, "taxa_glosa_perdida": 4.7, "ticket_medio": 177638.68, "principais_perdas": "Preço acima do concorrente (26), Cotação respondida fora do prazo (15)"}, {"vendedor": "Rogério Lins", "deals": 232, "ganhos": 130, "perdidos": 102, "win_rate": 56.0, "receita_ganha": 17016028.0, "receita_liquida": 16434932.0, "valor_perdido": 15063187.0, "valor_glosado": 1223845.0, "valor_recuperado": 642749.0, "glosa_nao_recuperada": 581096.0, "taxa_glosa_perdida": 3.4, "ticket_medio": 130892.52, "principais_perdas": "Preço acima do concorrente (25), Cotação respondida fora do prazo (17)"}, {"vendedor": "Tatiana Coelho", "deals": 255, "ganhos": 126, "perdidos": 129, "win_rate": 49.4, "receita_ganha": 14325786.0, "receita_liquida": 14040123.0, "valor_perdido": 14658210.0, "valor_glosado": 549521.0, "valor_recuperado": 263858.0, "glosa_nao_recuperada": 285663.0, "taxa_glosa_perdida": 2.0, "ticket_medio": 113696.71, "principais_perdas": "Preço acima do concorrente (24), Cliente com fornecedor exclusivo (18)"}, {"vendedor": "Paulo Menezes", "deals": 224, "ganhos": 121, "perdidos": 103, "win_rate": 54.0, "receita_ganha": 12870263.0, "receita_liquida": 12442133.0, "valor_perdido": 15057353.0, "valor_glosado": 849993.0, "valor_recuperado": 421863.0, "glosa_nao_recuperada": 428130.0, "taxa_glosa_perdida": 3.3, "ticket_medio": 106365.81, "principais_perdas": "Preço acima do concorrente (21), Cliente com fornecedor exclusivo (12)"}, {"vendedor": "Cíntia Barbosa", "deals": 146, "ganhos": 80, "perdidos": 66, "win_rate": 54.8, "receita_ganha": 9748703.0, "receita_liquida": 9531144.0, "valor_perdido": 6802931.0, "valor_glosado": 417898.0, "valor_recuperado": 200339.0, "glosa_nao_recuperada": 217559.0, "taxa_glosa_perdida": 2.2, "ticket_medio": 121858.79, "principais_perdas": "Preço acima do concorrente (16), Cliente com fornecedor exclusivo (12)"}, {"vendedor": "Luciana Prado", "deals": 101, "ganhos": 61, "perdidos": 40, "win_rate": 60.4, "receita_ganha": 7273293.0, "receita_liquida": 7068563.0, "valor_perdido": 5627147.0, "valor_glosado": 439240.0, "valor_recuperado": 234510.0, "glosa_nao_recuperada": 204730.0, "taxa_glosa_perdida": 2.8, "ticket_medio": 119234.31, "principais_perdas": "Cotação respondida fora do prazo (6), Procedimento não autorizado pelo pagador (5)"}, {"vendedor": "Joana Rios", "deals": 150, "ganhos": 70, "perdidos": 80, "win_rate": 46.7, "receita_ganha": 6707086.0, "receita_liquida": 6614154.0, "valor_perdido": 6015515.0, "valor_glosado": 204434.0, "valor_recuperado": 111502.0, "glosa_nao_recuperada": 92932.0, "taxa_glosa_perdida": 1.4, "ticket_medio": 95815.51, "principais_perdas": "Preço acima do concorrente (14), Cliente com fornecedor exclusivo (11)"}, {"vendedor": "Márcia Duarte", "deals": 94, "ganhos": 45, "perdidos": 49, "win_rate": 47.9, "receita_ganha": 5996502.0, "receita_liquida": 5787494.0, "valor_perdido": 7220511.0, "valor_glosado": 414133.0, "valor_recuperado": 205125.0, "glosa_nao_recuperada": 209008.0, "taxa_glosa_perdida": 3.5, "ticket_medio": 133255.6, "principais_perdas": "Preço acima do concorrente (11), Produto indisponível em estoque (7)"}, {"vendedor": "Fábio Correia", "deals": 61, "ganhos": 32, "perdidos": 29, "win_rate": 52.5, "receita_ganha": 5118748.0, "receita_liquida": 4848200.0, "valor_perdido": 4848982.0, "valor_glosado": 532318.0, "valor_recuperado": 261770.0, "glosa_nao_recuperada": 270548.0, "taxa_glosa_perdida": 5.3, "ticket_medio": 159960.88, "principais_perdas": "Preço acima do concorrente (8), Produto indisponível em estoque (5)"}, {"vendedor": "Ivan Peixoto", "deals": 57, "ganhos": 27, "perdidos": 30, "win_rate": 47.4, "receita_ganha": 5030073.0, "receita_liquida": 4756398.0, "valor_perdido": 6526145.0, "valor_glosado": 551287.0, "valor_recuperado": 277612.0, "glosa_nao_recuperada": 273675.0, "taxa_glosa_perdida": 5.4, "ticket_medio": 186299.0, "principais_perdas": "Preço acima do concorrente (8), Procedimento não autorizado pelo pagador (4)"}, {"vendedor": "Sérgio Tavares", "deals": 62, "ganhos": 28, "perdidos": 34, "win_rate": 45.2, "receita_ganha": 3554203.0, "receita_liquida": 3372884.0, "valor_perdido": 4375243.0, "valor_glosado": 330378.0, "valor_recuperado": 149059.0, "glosa_nao_recuperada": 181319.0, "taxa_glosa_perdida": 5.1, "ticket_medio": 126935.82, "principais_perdas": "Cotação respondida fora do prazo (8), Preço acima do concorrente (6)"}, {"vendedor": "Verônica Sá", "deals": 62, "ganhos": 28, "perdidos": 34, "win_rate": 45.2, "receita_ganha": 2066915.0, "receita_liquida": 2015462.0, "valor_perdido": 3502395.0, "valor_glosado": 109133.0, "valor_recuperado": 57680.0, "glosa_nao_recuperada": 51453.0, "taxa_glosa_perdida": 2.5, "ticket_medio": 73818.39, "principais_perdas": "Preço acima do concorrente (9), Produto indisponível em estoque (8)"}, {"vendedor": "Anderson Melo", "deals": 25, "ganhos": 17, "perdidos": 8, "win_rate": 68.0, "receita_ganha": 1088074.0, "receita_liquida": 1056374.0, "valor_perdido": 704618.0, "valor_glosado": 63961.0, "valor_recuperado": 32261.0, "glosa_nao_recuperada": 31700.0, "taxa_glosa_perdida": 2.9, "ticket_medio": 64004.35, "principais_perdas": "Cotação respondida fora do prazo (3), Divergência na folha de sala (1)"}], "top_clients": [{"cliente": "Vitalis Rede Integrada", "tipo": "Operadora verticalizada", "estado": "PE", "deals": 472, "ganhos": 222, "win_rate": 47.0, "receita_ganha": 47891767.0, "glosa_nao_recuperada": 2209160.0}, {"cliente": "Bem-Estar Saúde", "tipo": "Operadora verticalizada", "estado": "PE", "deals": 361, "ganhos": 187, "win_rate": 51.8, "receita_ganha": 35969450.0, "glosa_nao_recuperada": 1613562.0}, {"cliente": "Clinipar Integrada", "tipo": "Operadora verticalizada", "estado": "PE", "deals": 133, "ganhos": 74, "win_rate": 55.6, "receita_ganha": 13927228.0, "glosa_nao_recuperada": 634960.0}, {"cliente": "NordMed Saúde", "tipo": "Operadora verticalizada", "estado": "AL", "deals": 104, "ganhos": 52, "win_rate": 50.0, "receita_ganha": 9296666.0, "glosa_nao_recuperada": 418805.0}, {"cliente": "Bom Viver Planos", "tipo": "Operadora não verticalizada", "estado": "RN", "deals": 112, "ganhos": 58, "win_rate": 51.8, "receita_ganha": 8597182.0, "glosa_nao_recuperada": 336587.0}, {"cliente": "Prever Saúde", "tipo": "Operadora não verticalizada", "estado": "PE", "deals": 87, "ganhos": 37, "win_rate": 42.5, "receita_ganha": 5250449.0, "glosa_nao_recuperada": 183279.0}, {"cliente": "Saúde Atlântico", "tipo": "Operadora não verticalizada", "estado": "AL", "deals": 71, "ganhos": 40, "win_rate": 56.3, "receita_ganha": 4129752.0, "glosa_nao_recuperada": 163823.0}, {"cliente": "AssistCare Planos", "tipo": "Operadora não verticalizada", "estado": "PE", "deals": 45, "ganhos": 23, "win_rate": 51.1, "receita_ganha": 3237457.0, "glosa_nao_recuperada": 132639.0}, {"cliente": "Hospital Municipal de Jaboatão", "tipo": "Hospital público", "estado": "PE", "deals": 30, "ganhos": 15, "win_rate": 50.0, "receita_ganha": 2687504.0, "glosa_nao_recuperada": 103334.0}, {"cliente": "Centro Cirúrgico Casa Forte", "tipo": "Hospital privado", "estado": "PE", "deals": 35, "ganhos": 22, "win_rate": 62.9, "receita_ganha": 2439392.0, "glosa_nao_recuperada": 98325.0}, {"cliente": "Hospital Casa Amarela", "tipo": "Hospital privado", "estado": "PE", "deals": 40, "ganhos": 26, "win_rate": 65.0, "receita_ganha": 2037273.0, "glosa_nao_recuperada": 80653.0}, {"cliente": "Hospital Nossa Senhora do Carmo", "tipo": "Hospital privado", "estado": "PE", "deals": 30, "ganhos": 18, "win_rate": 60.0, "receita_ganha": 1560395.0, "glosa_nao_recuperada": 51320.0}, {"cliente": "Clínica Cardio Espinheiro", "tipo": "Hospital privado", "estado": "AL", "deals": 25, "ganhos": 16, "win_rate": 64.0, "receita_ganha": 1526198.0, "glosa_nao_recuperada": 57205.0}, {"cliente": "Hospital Municipal do Cabo", "tipo": "Hospital público", "estado": "PE", "deals": 29, "ganhos": 18, "win_rate": 62.1, "receita_ganha": 1466506.0, "glosa_nao_recuperada": 38741.0}, {"cliente": "Hospital Ponta Verde", "tipo": "Hospital privado", "estado": "PE", "deals": 25, "ganhos": 13, "win_rate": 52.0, "receita_ganha": 1466129.0, "glosa_nao_recuperada": 70710.0}], "loss_reasons": [{"motivo": "Preço acima do concorrente", "qtd": 241, "valor_perdido": 37558545.0, "percentual_valor": 19.47, "etapa_principal": "E1 Cotacao", "linha_principal": "Ortopedia"}, {"motivo": "Cliente com fornecedor exclusivo", "qtd": 148, "valor_perdido": 22171206.0, "percentual_valor": 11.49, "etapa_principal": "E1 Cotacao", "linha_principal": "Ortopedia"}, {"motivo": "Cotação respondida fora do prazo", "qtd": 142, "valor_perdido": 21771070.0, "percentual_valor": 11.28, "etapa_principal": "E1 Cotacao", "linha_principal": "Ortopedia"}, {"motivo": "Produto indisponível em estoque", "qtd": 108, "valor_perdido": 16572389.0, "percentual_valor": 8.59, "etapa_principal": "E1 Cotacao", "linha_principal": "Ortopedia"}, {"motivo": "Procedimento não autorizado pelo pagador", "qtd": 92, "valor_perdido": 15745875.0, "percentual_valor": 8.16, "etapa_principal": "E2 Autorizacao", "linha_principal": "Ortopedia"}, {"motivo": "Sem contrato para atender", "qtd": 67, "valor_perdido": 10330709.0, "percentual_valor": 5.35, "etapa_principal": "E1 Cotacao", "linha_principal": "Ortopedia"}, {"motivo": "Glosa não recuperada", "qtd": 52, "valor_perdido": 9837097.0, "percentual_valor": 5.1, "etapa_principal": "E4 Faturamento", "linha_principal": "Ortopedia"}, {"motivo": "Cirurgia cancelada", "qtd": 55, "valor_perdido": 9579720.0, "percentual_valor": 4.96, "etapa_principal": "E2 Autorizacao", "linha_principal": "Ortopedia"}, {"motivo": "Inadimplência do cliente", "qtd": 42, "valor_perdido": 9329882.0, "percentual_valor": 4.84, "etapa_principal": "E4 Faturamento", "linha_principal": "Ortopedia"}, {"motivo": "Divergência na folha de sala", "qtd": 39, "valor_perdido": 8847546.0, "percentual_valor": 4.59, "etapa_principal": "E4 Faturamento", "linha_principal": "Ortopedia"}, {"motivo": "Material devolvido sem uso", "qtd": 42, "valor_perdido": 8467893.0, "percentual_valor": 4.39, "etapa_principal": "E3 Cirurgia", "linha_principal": "Ortopedia"}, {"motivo": "Autorização expirou", "qtd": 39, "valor_perdido": 6172275.0, "percentual_valor": 3.2, "etapa_principal": "E2 Autorizacao", "linha_principal": "Ortopedia"}, {"motivo": "Troca de fornecedor em sala", "qtd": 43, "valor_perdido": 5859420.0, "percentual_valor": 3.04, "etapa_principal": "E3 Cirurgia", "linha_principal": "Ortopedia"}, {"motivo": "Nota fiscal não autorizada pelo hospital", "qtd": 23, "valor_perdido": 5072171.0, "percentual_valor": 2.63, "etapa_principal": "E4 Faturamento", "linha_principal": "Ortopedia"}, {"motivo": "Troca de fonte pagadora no meio do processo", "qtd": 18, "valor_perdido": 2880719.0, "percentual_valor": 1.49, "etapa_principal": "E2 Autorizacao", "linha_principal": "Ortopedia"}, {"motivo": "Extravio intra-hospitalar", "qtd": 22, "valor_perdido": 2755307.0, "percentual_valor": 1.43, "etapa_principal": "E3 Cirurgia", "linha_principal": "Ortopedia"}], "loss_stages": [{"etapa": "E1 Cotacao", "qtd": 706, "valor_perdido": 108403919.0, "percentual_valor": 56.18, "principais_motivos": "Preço acima do concorrente (241), Cliente com fornecedor exclusivo (148)"}, {"etapa": "E2 Autorizacao", "qtd": 204, "valor_perdido": 34378589.0, "percentual_valor": 17.82, "principais_motivos": "Procedimento não autorizado pelo pagador (92), Cirurgia cancelada (55)"}, {"etapa": "E4 Faturamento", "qtd": 156, "valor_perdido": 33086696.0, "percentual_valor": 17.15, "principais_motivos": "Glosa não recuperada (52), Inadimplência do cliente (42)"}, {"etapa": "E3 Cirurgia", "qtd": 107, "valor_perdido": 17082620.0, "percentual_valor": 8.85, "principais_motivos": "Troca de fornecedor em sala (43), Material devolvido sem uso (42)"}], "cycles": {"cotacao_autorizacao": 14.8, "cirurgia_faturamento": 58.0, "consignacao": 39.6, "pagamento": 125.1, "ciclo_total": 164.7}};
+
+    function switchTab(tabId) {
+      const tabs = ['overview', 'dilemmas', 'ceo', 'cfo', 'coo', 'chro', 'cmo'];
+      tabs.forEach(t => {
+        const content = document.getElementById('tab-' + t);
+        const btn = document.getElementById('tab-btn-' + t);
+        if (content && btn) {
+          if (t === tabId) {
+            content.classList.remove('hidden');
+            btn.classList.add('fh-tab-active');
+          } else {
+            content.classList.add('hidden');
+            btn.classList.remove('fh-tab-active');
+          }
+        }
+      });
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 50);
+    }
+
+    function filterSellerTable() {
+      const input = document.getElementById('sellerSearch').value.toLowerCase();
+      const rows = document.querySelectorAll('#sellerTable tbody tr');
+      rows.forEach(r => {
+        const name = r.cells[0].innerText.toLowerCase();
+        if (name.includes(input)) {
+          r.style.display = '';
+        } else {
+          r.style.display = 'none';
+        }
+      });
+    }
+
+    Chart.defaults.color = '#CECABB';
+    Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+    Chart.defaults.plugins.legend.labels.usePointStyle = true;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+
+      // Chart 1: Overview YoY
+      const ctxOverviewYoY = document.getElementById('chartOverviewYoY').getContext('2d');
+      new Chart(ctxOverviewYoY, {
+        type: 'bar',
+        data: {
+          labels: dataBundle.years.map(y => y.ano),
+          datasets: [
+            {
+              label: 'Receita Ganha (R$ M)',
+              data: dataBundle.years.map(y => (y.receita_ganha / 1e6).toFixed(2)),
+              backgroundColor: '#2AC59E',
+              borderRadius: 6,
+            },
+            {
+              label: 'Valor Perdido (R$ M)',
+              data: dataBundle.years.map(y => (y.valor_perdido / 1e6).toFixed(2)),
+              backgroundColor: '#FF6568',
+              borderRadius: 6,
+            },
+            {
+              label: 'Receita Líquida (R$ M)',
+              data: dataBundle.years.map(y => (y.receita_liquida / 1e6).toFixed(2)),
+              type: 'line',
+              borderColor: '#52E1B9',
+              backgroundColor: '#52E1B9',
+              borderWidth: 2,
+              pointRadius: 4,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { grid: { color: 'rgba(206, 202, 187, 0.08)' }, title: { display: true, text: 'R$ Milhões' } },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+
+      // Chart 2: Overview Losses
+      const topLosses = dataBundle.loss_reasons.slice(0, 6);
+      const ctxOverviewLosses = document.getElementById('chartOverviewLosses').getContext('2d');
+      new Chart(ctxOverviewLosses, {
+        type: 'doughnut',
+        data: {
+          labels: topLosses.map(l => l.motivo),
+          datasets: [{
+            data: topLosses.map(l => (l.valor_perdido / 1e6).toFixed(2)),
+            backgroundColor: ['#FF6568', '#EB5757', '#E2B93B', '#2AC59E', '#52E1B9', '#C2EAE8'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'right', labels: { boxWidth: 10, font: { size: 9 } } }
+          }
+        }
+      });
+
+      // Chart 3: CEO States
+      const ctxCeoStates = document.getElementById('chartCeoStates').getContext('2d');
+      new Chart(ctxCeoStates, {
+        type: 'bar',
+        data: {
+          labels: dataBundle.states.map(s => s.estado + ' (' + s.win_rate + '%)'),
+          datasets: [{
+            label: 'Receita Ganha (R$ M)',
+            data: dataBundle.states.map(s => (s.receita_ganha / 1e6).toFixed(2)),
+            backgroundColor: ['#2AC59E', '#52E1B9', '#E2B93B', '#C2EAE8'],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { grid: { color: 'rgba(206, 202, 187, 0.08)' }, title: { display: true, text: 'R$ Milhões' } },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+
+      // Chart 4: CEO Lines
+      const ctxCeoLines = document.getElementById('chartCeoLines').getContext('2d');
+      new Chart(ctxCeoLines, {
+        type: 'pie',
+        data: {
+          labels: dataBundle.lines.map(l => l.linha),
+          datasets: [{
+            data: dataBundle.lines.map(l => (l.receita_ganha / 1e6).toFixed(2)),
+            backgroundColor: ['#2AC59E', '#52E1B9', '#E2B93B'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12 } }
+          }
+        }
+      });
+
+      // Chart 5: CFO Glosas
+      const ctxCfoGlosas = document.getElementById('chartCfoGlosas').getContext('2d');
+      new Chart(ctxCfoGlosas, {
+        type: 'bar',
+        data: {
+          labels: dataBundle.payers.map(p => p.tipo),
+          datasets: [
+            {
+              label: 'Glosa Total Aplicada (R$ M)',
+              data: dataBundle.payers.map(p => (p.valor_glosado / 1e6).toFixed(2)),
+              backgroundColor: '#E2B93B',
+              borderRadius: 6
+            },
+            {
+              label: 'Glosa Não Recuperada (R$ M)',
+              data: dataBundle.payers.map(p => (p.glosa_nao_recuperada / 1e6).toFixed(2)),
+              backgroundColor: '#FF6568',
+              borderRadius: 6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { grid: { color: 'rgba(206, 202, 187, 0.08)' }, title: { display: true, text: 'R$ Milhões' } },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+
+      // Chart 6: CFO DSO
+      const ctxCfoDso = document.getElementById('chartCfoDso').getContext('2d');
+      new Chart(ctxCfoDso, {
+        type: 'bar',
+        data: {
+          labels: dataBundle.payers.map(p => p.tipo),
+          datasets: [
+            {
+              label: 'DSO Pagamento (Dias)',
+              data: dataBundle.payers.map(p => p.dias_pagamento_medio),
+              backgroundColor: '#2AC59E',
+              borderRadius: 6
+            },
+            {
+              label: 'Dias Consignação',
+              data: dataBundle.payers.map(p => p.dias_consignacao_medio),
+              backgroundColor: '#52E1B9',
+              borderRadius: 6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { grid: { color: 'rgba(206, 202, 187, 0.08)' }, title: { display: true, text: 'Dias Corridos' } },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+
+      // Chart 7: COO Stages
+      const ctxCooStages = document.getElementById('chartCooStages').getContext('2d');
+      new Chart(ctxCooStages, {
+        type: 'bar',
+        data: {
+          labels: dataBundle.loss_stages.map(s => s.etapa),
+          datasets: [{
+            label: 'Valor Perdido por Etapa (R$ M)',
+            data: dataBundle.loss_stages.map(s => (s.valor_perdido / 1e6).toFixed(2)),
+            backgroundColor: ['#2AC59E', '#52E1B9', '#E2B93B', '#FF6568'],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { grid: { color: 'rgba(206, 202, 187, 0.08)' }, title: { display: true, text: 'R$ Milhões' } },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+
+      // Chart 8: COO Operational Losses
+      const opLosses = dataBundle.loss_reasons.filter(l => [
+        'Cotação respondida fora do prazo', 
+        'Produto indisponível em estoque', 
+        'Divergência na folha de sala', 
+        'Material devolvido sem uso', 
+        'Extravio intra-hospitalar'
+      ].includes(l.motivo));
+      const ctxCooOp = document.getElementById('chartCooOperationalLosses').getContext('2d');
+      new Chart(ctxCooOp, {
+        type: 'doughnut',
+        data: {
+          labels: opLosses.map(l => l.motivo),
+          datasets: [{
+            data: opLosses.map(l => (l.valor_perdido / 1e6).toFixed(2)),
+            backgroundColor: ['#FF6568', '#EB5757', '#E2B93B', '#2AC59E', '#C2EAE8'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'right', labels: { boxWidth: 10, font: { size: 9 } } }
+          }
+        }
+      });
+
+      // Chart 9: CHRO Revenue
+      const topSellers = dataBundle.sellers.slice(0, 10);
+      const ctxChroRev = document.getElementById('chartChroRevenue').getContext('2d');
+      new Chart(ctxChroRev, {
+        type: 'bar',
+        data: {
+          labels: topSellers.map(s => s.vendedor),
+          datasets: [{
+            label: 'Receita Ganha (R$ M)',
+            data: topSellers.map(s => (s.receita_ganha / 1e6).toFixed(2)),
+            backgroundColor: '#2AC59E',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: 'y',
+          scales: {
+            x: { grid: { color: 'rgba(206, 202, 187, 0.08)' }, title: { display: true, text: 'R$ Milhões' } },
+            y: { grid: { display: false } }
+          }
+        }
+      });
+
+      // Chart 10: CHRO Win Rate
+      const ctxChroWr = document.getElementById('chartChroWinRate').getContext('2d');
+      new Chart(ctxChroWr, {
+        type: 'bar',
+        data: {
+          labels: topSellers.map(s => s.vendedor),
+          datasets: [
+            {
+              label: 'Win Rate (%)',
+              data: topSellers.map(s => s.win_rate),
+              backgroundColor: '#52E1B9',
+              borderRadius: 6
+            },
+            {
+              label: '% Glosa Perdida (%)',
+              data: topSellers.map(s => s.taxa_glosa_perdida),
+              backgroundColor: '#FF6568',
+              borderRadius: 6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { grid: { color: 'rgba(206, 202, 187, 0.08)' }, title: { display: true, text: 'Percentual (%)' } },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+
+      // Chart 11: CMO Products
+      const ctxCmoProd = document.getElementById('chartCmoProducts').getContext('2d');
+      new Chart(ctxCmoProd, {
+        type: 'bar',
+        data: {
+          labels: dataBundle.products.slice(0, 8).map(p => p.produto),
+          datasets: [{
+            label: 'Receita Ganha (R$ M)',
+            data: dataBundle.products.slice(0, 8).map(p => (p.receita_ganha / 1e6).toFixed(2)),
+            backgroundColor: '#2AC59E',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: 'y',
+          scales: {
+            x: { grid: { color: 'rgba(206, 202, 187, 0.08)' }, title: { display: true, text: 'R$ Milhões' } },
+            y: { grid: { display: false } }
+          }
+        }
+      });
+
+      // Chart 12: CMO Loss Pareto
+      const top8Loss = dataBundle.loss_reasons.slice(0, 8);
+      const ctxCmoLoss = document.getElementById('chartCmoLossPareto').getContext('2d');
+      new Chart(ctxCmoLoss, {
+        type: 'bar',
+        data: {
+          labels: top8Loss.map(l => l.motivo),
+          datasets: [{
+            label: 'Valor Perdido (R$ M)',
+            data: top8Loss.map(l => (l.valor_perdido / 1e6).toFixed(2)),
+            backgroundColor: '#FF6568',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { grid: { color: 'rgba(206, 202, 187, 0.08)' }, title: { display: true, text: 'R$ Milhões' } },
+            x: { grid: { display: false }, ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 } } }
+          }
+        }
+      });
+
+    });
+  </script>
+</body>
+</html>
