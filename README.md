@@ -6,11 +6,11 @@
   </picture>
 </p>
 
-<h1 align="center">Workshop Executivo C-Suite • FH Data & KeyCore</h1>
+<h1 align="center">Workshop Data-Driven Health • REC'n'Play (Porto Digital)</h1>
 
 <p align="center">
-  <strong>Inteligência Estratégica Multidimensional, Alinhamento de OKRs e Análise Sistêmica de Capital</strong><br>
-  <em>Estudo de Caso Baseado em 2.371 Cirurgias Médicas e Soluções OPME (2021-2025)</em>
+  <strong>Decisões Estratégicas e Geração de Valor com Dados no Setor de Saúde</strong><br>
+  <em>Estudo de Caso Executivo Baseado em 2.371 Cirurgias Médicas e Soluções OPME (2021-2025)</em>
 </p>
 
 <p align="center">
@@ -21,13 +21,22 @@
 
 ---
 
-## 🏢 Sobre as Empresas e o Workshop
+<p align="center">
+  <img src="assets/workshop-recnplay-fhdata.jpeg" alt="Oficina REC'n'Play - Data-Driven Health" width="380" style="border-radius: 16px; box-shadow: 0 8px 32px rgba(42, 197, 158, 0.25);">
+</p>
 
-Este repositório consolida as entregas e a inteligência gerada durante o **Workshop Estratégico Executivo**, orquestrado pela **[KeyCore](https://keycore.com.br)** em conjunto com a **[FH Data](https://www.fhdata.com.br)**.
+<p align="center">
+  <sub><strong>Oficina Oficial no REC'n'Play • Capítulo Saúde</strong> | Trilha: <em>Educação e Futuro do Trabalho em Saúde</em><br>
+  Facilitador: <strong>Fernando Aureliano</strong> (Founder e CEO da FH Data) • Em parceria com <strong>Porto Digital</strong>, <strong>SEBRAE</strong>, <strong>Real Hospital Português</strong> e <strong>KeyCore</strong>.</sub>
+</p>
 
-* **KeyCore**: Empresa de tecnologia, arquitetura de software e governança estratégica que liderou a modelagem sistêmica, a metodologia de descoberta de pontos cegos de incentivo e a engenharia do dashboard analítico.
-* **FH Data ([fhdata.com.br](https://www.fhdata.com.br))**: Empresa especialista em inteligência de dados, analytics avançado e soluções orientadas a dados para o ecossistema de saúde e negócios de alto impacto.
-* **FH Saúde / Operação Médica**: Distribuidora e operadora de dispositivos médicos e soluções em OPME (Órteses, Próteses e Materiais Especiais) com atuação em Cardiologia, Ortopedia e Cirurgia Geral no Nordeste (PE, AL, RN, PB).
+---
+
+## 🏥 Contexto do Workshop
+
+Este repositório documenta a metodologia prática e os entregáveis de inteligência analítica apresentados durante o **REC'n'Play (Capítulo Saúde)** — promovido pelo **Porto Digital** em parceria com o **SEBRAE**, o **Real Hospital Português** e a **Ampla**.
+
+A oficina **"Data-Driven Health: Decisões Estratégicas e Geração de Valor com Dados"**, liderada por **Fernando Aureliano** (*Founder & CEO da FH Data*) com a participação estratégica e arquitetura analítica da **[KeyCore](https://keycore.com.br)**, teve como objetivo transformar uma base operacional bruta de **2.371 procedimentos cirúrgicos de alta complexidade em OPME** em um **painel executivo de tomada de decisão multidimensional para os 5 C-Levels (CEO, CFO, COO, CHRO e CMO)**.
 
 ---
 
@@ -41,14 +50,14 @@ O painel executivo interativo construído com a paleta oficial da **FH Data** (D
 
 ## 📊 Sumário dos Dados Reais Auditados (2021 a 2025)
 
-| Métrica Macro | Valor Consolidado | Contexto e Impacto |
+| Métrica Macro | Valor Consolidado | Contexto e Impacto no Negócio |
 | :--- | :---: | :--- |
 | **Pipeline Total Processado** | **R$ 369.251.834,00** | 2.371 oportunidades e cotações cirúrgicas analisadas |
 | **Receita Bruta Ganha** | **R$ 176.300.010,00** | 1.198 cirurgias realizadas (**50,5% Win Rate**) |
 | **Crescimento Histórico (CAGR)** | **+19,3% a.a.** | R$ 24,0M (2021) ➔ R$ 48,6M (2025) (**+102,5% acumulado**) |
 | **Valor Perdido no Funil** | **R$ 192.951.824,00** | 1.173 cotações não convertidas nas 4 etapas |
-| **Glosas Hospitalares Aplicadas** | **R$ 14.491.875,00** | 8,22% do faturamento bruto retido por convênios |
-| **Glosas Não Recuperadas (Prejuízo Real)** | **R$ 7.223.832,00** | 4,10% da receita perdida definitivamente em recursos indeferidos |
+| **Glosas Hospitalares Aplicadas** | **R$ 14.491.875,00** | 8,22% do faturamento bruto retido por operadoras e convênios |
+| **Glosas Não Recuperadas (Prejuízo Real)** | **R$ 7.223.832,00** | 4,10% da receita perdida em definitivo por recursos indeferidos |
 | **Receita Líquida Realizada** | **R$ 169.076.178,00** | Caixa efetivo após dedução das glosas definitivas |
 | **Ciclo Operacional Médio** | **164,7 dias** | Lead time completo: Cotação ➔ Cirurgia ➔ Faturamento ➔ Pagamento |
 | **Concentração Geográfica** | **76,1% em PE** | Pernambuco responde por R$ 134,2M de faturamento |
@@ -58,7 +67,7 @@ O painel executivo interativo construído com a paleta oficial da **FH Data** (D
 
 ## 🎯 As 5 Sessões Estratégicas C-Suite (Perguntas, OKRs & Pontos Cegos)
 
-O grande diferencial deste workshop foi **desmontar a atuação em silos** e evidenciar a interdependência entre os 5 diretores:
+O ponto alto da oficina foi demonstrar como a **atuação em silos departamentais destrói capital de giro** e como alinhar os 5 executivos sob uma visão sistêmica integrada:
 
 ```
                                   ┌────────────────────────┐
@@ -85,11 +94,11 @@ O grande diferencial deste workshop foi **desmontar a atuação em silos** e evi
 
 ### 1. 👑 Sessão CEO (Chief Executive Officer)
 * **Pergunta Central:** *"Qual é a meta do ano que vem e dos próximos cinco anos?"*
-* **OKR:** Chegar a **R$ 110 Milhões em 5 anos (2030)** e assumir a liderança regional **sem captar dívida e sem diluir a sociedade**.
-  * *Curva:* 2025: R$ 48,6M ➔ 2026: R$ 57,2M (+17,7%) ➔ 2030: R$ 110M (+126,3%).
-* **O que o OKR empurra a fazer (Vício):** Cobrar crescimento de receita de todo mundo o tempo todo ("vender a qualquer custo").
-* **Onde ele erra sozinho (Ponto Cego):** Trata a restrição de capital como detalhe do CFO, quando ela é exatamente o que define a **velocidade máxima de crescimento sustentável da empresa inteira**.
-  * *A Matemática:* Com o ciclo atual de 165 dias, para faturar R$ 110M a empresa precisará de **R$ 49,6 Milhões de capital de giro imobilizado**. Sem dívida nem diluição, a empresa quebra antes de bater R$ 70M se não encurtar o ciclo de caixa!
+* **OKR:** Chegar a **R$ 110 Milhões em 5 anos (2030)** e assumir a liderança regional **sem captar dívida bancária e sem diluir a sociedade** (100% autofinanciado por geração de caixa).
+  * *Curva de Faturamento:* 2025: R$ 48,6M ➔ 2026: R$ 57,2M (+17,7%) ➔ 2030: R$ 110M (+126,3%).
+* **O que o OKR empurra a fazer (Vício):** Cobrar crescimento agressivo de receita de todo mundo o tempo todo ("vender a qualquer custo").
+* **Onde ele erra sozinho (Ponto Cego):** Trata a restrição de capital como detalhe do CFO, quando ela é exatamente o que define a **velocidade máxima de crescimento sustentável da empresa inteira (*Self-Sustaining Growth Rate*)**.
+  * *A Trava Matemática:* Com o ciclo atual de 165 dias, para faturar R$ 110M a empresa precisará de **R$ 49,6 Milhões de capital de giro imobilizado**. Sem dívida nem diluição, a empresa quebra antes de bater R$ 70M se não encurtar o ciclo operacional!
 
 ---
 
@@ -133,7 +142,7 @@ O grande diferencial deste workshop foi **desmontar a atuação em silos** e evi
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias e Metodologia
 
 * **Frontend & Dashboard:** HTML5, Tailwind CSS, Chart.js, Lucide Icons, Google Fonts (Plus Jakarta Sans).
 * **Processamento de Dados:** Python 3 (Scripts de agregação estatística, cálculo de capital de giro e conversão em JSON).
@@ -162,15 +171,10 @@ xdg-open index.html
 start index.html
 ```
 
-3. (Opcional) Regenerar os dados a partir do CSV:
-```bash
-python3 generate_dashboard.py
-python3 generate_fhdata_dashboard.py
-```
-
 ---
 
 <p align="center">
-  <strong>Orquestrado por KeyCore • Inteligência de Dados por FH Data</strong><br>
-  <sub>Todos os dados são confidenciais e estruturados para fins educacionais e de governança estratégica corporativa.</sub>
+  <strong>REC'n'Play • Porto Digital • SEBRAE • Real Hospital Português</strong><br>
+  <strong>Orquestrado por KeyCore • Inteligência Estratégica por FH Data</strong><br>
+  <sub>Estudo de caso e dados estruturados para fins de treinamento e governança executiva.</sub>
 </p>
