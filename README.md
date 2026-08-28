@@ -48,6 +48,37 @@ O painel executivo interativo construído com a paleta oficial da **FH Data** (D
 
 ---
 
+## 🖥️ Telas do sistema
+
+Painel C-Suite e Mesa C-Suite (chat com as cinco cadeiras). Cada pergunta recebe uma dica do CEO, CFO, COO, CHRO e CMO, com a persona visível na interface.
+
+<p align="center">
+  <img src="assets/1print.png" alt="Mesa C-Suite — Qual vendedor performa de verdade?" width="900">
+</p>
+<p align="center"><sub><strong>Mesa C-Suite</strong> · Chat com as cinco vozes. Pergunta: <em>Qual vendedor performa de verdade?</em> — CHRO em leitura principal.</sub></p>
+
+<p align="center">
+  <img src="assets/2print.png" alt="Mesa C-Suite — Minha maior alavanca de crescimento hoje?" width="900">
+</p>
+<p align="center"><sub><strong>Mesa C-Suite</strong> · Pergunta: <em>Minha maior alavanca de crescimento hoje?</em> — CEO em leitura principal.</sub></p>
+
+<p align="center">
+  <img src="assets/3print.png" alt="Dashboard FH Data C-Suite — Visão Geral" width="900">
+</p>
+<p align="center"><sub><strong>Dashboard</strong> · Visão Geral — pipeline, receita ganha, perdas, glosas e ciclo 2021–2025.</sub></p>
+
+<p align="center">
+  <img src="assets/4print.png" alt="Dashboard FH Data C-Suite — Dilemas de OKR e perguntas" width="900">
+</p>
+<p align="center"><sub><strong>Dashboard</strong> · Dilemas de OKR & Perguntas — alinhamento CEO e CHRO (OKR, vício de incentivo e ponto cego).</sub></p>
+
+<p align="center">
+  <img src="assets/5print.png" alt="Dashboard FH Data C-Suite — CHRO Força Comercial" width="900">
+</p>
+<p align="center"><sub><strong>Dashboard</strong> · CHRO • Força Comercial — produtividade real vs. capital preso por vendedor.</sub></p>
+
+---
+
 ## 📊 Sumário dos Dados Reais Auditados (2021 a 2025)
 
 | Métrica Macro | Valor Consolidado | Contexto e Impacto no Negócio |

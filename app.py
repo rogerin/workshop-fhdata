@@ -10,6 +10,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
+from rag.c_suite import public_personas
 from rag.engine import get_engine, peek_engine
 
 ROOT = Path(__file__).resolve().parent
@@ -19,7 +20,7 @@ _boot_error: str | None = None
 _boot_lock = threading.Lock()
 
 
-def _safe_engine() -> ChatEngine:
+def _safe_engine():
     global _boot_error
     with _boot_lock:
         try:
@@ -69,6 +70,11 @@ def dashboard():
 @app.get("/chat")
 def chat_page():
     return FileResponse(STATIC / "chat.html")
+
+
+@app.get("/api/personas")
+def personas():
+    return {"personas": public_personas()}
 
 
 @app.get("/api/health")
